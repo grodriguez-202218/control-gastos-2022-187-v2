@@ -47,7 +47,6 @@ export const initDatabase = async (): Promise<void> => {
   `);
   console.log('✓ Tabla "users" verificada/creada.');
 
-  // 🔧 TABLA UNIFICADA - transactions (antes estaban en dos tablas)
   await pool.query(`
     CREATE TABLE IF NOT EXISTS transactions (
       id SERIAL PRIMARY KEY,
@@ -66,7 +65,6 @@ export const initDatabase = async (): Promise<void> => {
     CREATE INDEX IF NOT EXISTS idx_transactions_user_date ON transactions (user_id, date);
   `);
   
-  // Migración preventiva por si la tabla ya existía previamente sin la columna 'notes' u otras o con constraint restrictivo
   await pool.query(`
     ALTER TABLE transactions ADD COLUMN IF NOT EXISTS notes TEXT;
     ALTER TABLE transactions ADD COLUMN IF NOT EXISTS date DATE DEFAULT CURRENT_DATE;
