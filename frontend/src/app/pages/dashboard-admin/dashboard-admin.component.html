@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureo Lunas - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: #0e1510;
+            color: #dde5db;
+        }
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            padding: 2rem;
+            border-radius: 8px;
+            z-index: 9999;
+        }
+        .loading.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(182, 211, 57, 0.3);
+            border-top: 3px solid #b6d339;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .card {
+            background-color: #1a211c;
+            border: 1px solid rgba(139, 195, 74, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #325341 0%, #1a211c 100%);
+            border: 1px solid rgba(67, 130, 95, 0.2);
+        }
+        .error-toast {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            z-index: 10000;
+        }
+        .error-toast.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <span>Cargando...</span>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="error-toast" id="errorToast"></div>
+
+    <!-- Sidebar -->
+    <nav class="fixed left-0 top-0 h-full w-64 bg-surface-container border-r border-outline-variant/20 py-6 z-50">
+        <div class="px-6 mb-8 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-on-primary">admin_panel_settings</span>
+            </div>
+            <div>
+                <h1 class="font-bold text-primary text-lg">Aureo Lunas</h1>
+                <p class="text-xs text-on-surface-variant">Admin Panel</p>
+            </div>
+        </div>
+
+        <button class="mx-6 mb-8 bg-primary-container text-slate-900 py-2 px-4 rounded font-medium flex items-center justify-center gap-2 hover:opacity-90 w-[calc(100%-3rem)]">
+            <span class="material-symbols-outlined">add</span>
+            Agregar Transacción
+        </button>
+
+        <ul class="flex flex-col gap-1 font-body-sm flex-1">
+            <li>
+                <a onclick="navigateTo('dashboard')" class="cursor-pointer flex items-center gap-3 px-4 py-3 text-primary border-l-4 border-primary bg-secondary-container/10 rounded mx-2 transition-colors">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Panel de Control
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('users')" class="cursor-pointer flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded mx-2">
+                    <span class="material-symbols-outlined">people</span>
+                    Usuarios
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('transactions')" class="cursor-pointer flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded mx-2">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    Transacciones
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('reports')" class="cursor-pointer flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded mx-2">
+                    <span class="material-symbols-outlined">analytics</span>
+                    Reportes
+                </a>
+            </li>
+            <li>
+                <a onclick="navigateTo('settings')" class="cursor-pointer flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded mx-2">
+                    <span class="material-symbols-outlined">settings</span>
+                    Configuración
+                </a>
+            </li>
+        </ul>
+
+        <ul class="flex flex-col gap-1 font-body-sm mt-auto border-t border-outline-variant/20 pt-4">
+            <li>
+                <a class="cursor-pointer flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded mx-2">
+                    <span class="material-symbols-outlined">help</span>
+                    Ayuda
+                </a>
+            </li>
+            <li>
+                <a onclick="logout()" class="cursor-pointer flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded mx-2">
+                    <span class="material-symbols-outlined">logout</span>
+                    Cerrar Sesión
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="ml-64 flex-1 flex flex-col h-screen overflow-hidden">
+        <!-- Top Bar -->
+        <header class="bg-background/80 backdrop-blur-md border-b border-outline-variant/20 h-16 flex justify-between items-center px-8 z-40">
+            <div>
+                <h2 class="text-2xl font-bold text-on-surface" id="pageTitle">Panel de Control</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-on-surface-variant hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/30 overflow-hidden">
+                    <img class="w-full h-full object-cover" alt="Avatar" src="https://via.placeholder.com/40">
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <main class="flex-1 overflow-y-auto p-8">
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="space-y-8">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="stat-card">
+                        <div class="text-on-surface-variant text-sm font-medium mb-2">USUARIOS TOTALES</div>
+                        <div class="text-3xl font-bold text-primary" id="stat-users">0</div>
+                        <div class="text-xs text-on-surface-variant mt-2">Activos este mes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-on-surface-variant text-sm font-medium mb-2">TRANSACCIONES</div>
+                        <div class="text-3xl font-bold text-white" id="stat-transactions">0</div>
+                        <div class="text-xs text-on-surface-variant mt-2">Registradas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-on-surface-variant text-sm font-medium mb-2">INGRESOS TOTALES</div>
+                        <div class="text-3xl font-bold text-tertiary" id="stat-income">Q0.00</div>
+                        <div class="text-xs text-on-surface-variant mt-2">Todos los usuarios</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-on-surface-variant text-sm font-medium mb-2">GASTOS TOTALES</div>
+                        <div class="text-3xl font-bold text-error" id="stat-expenses">Q0.00</div>
+                        <div class="text-xs text-on-surface-variant mt-2">Todos los usuarios</div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Cash Flow Chart -->
+                    <div class="lg:col-span-2 card">
+                        <h3 class="text-lg font-semibold text-on-surface mb-4">Flujo de Caja Mensual</h3>
+                        <div class="h-80">
+                            <canvas id="cashFlowChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Expenses by Category -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-on-surface mb-4">Gastos por Categoría</h3>
+                        <div class="h-80">
+                            <canvas id="expenseCategoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-on-surface">Transacciones Recientes</h3>
+                        <a href="#" class="text-primary text-sm hover:underline">Ver Todo</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-xs text-on-surface-variant font-medium border-b border-outline-variant/20">
+                                <tr>
+                                    <th class="pb-3 font-semibold">Usuario</th>
+                                    <th class="pb-3 font-semibold">Descripción</th>
+                                    <th class="pb-3 font-semibold">Categoría</th>
+                                    <th class="pb-3 font-semibold">Tipo</th>
+                                    <th class="pb-3 font-semibold text-right">Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant/10" id="recent-transactions-tbody">
+                                <tr class="hover:bg-surface-container/50 transition-colors">
+                                    <td class="py-3">-</td>
+                                    <td class="py-3">-</td>
+                                    <td class="py-3">-</td>
+                                    <td class="py-3">-</td>
+                                    <td class="py-3 text-right">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users View -->
+            <div id="users-view" class="hidden space-y-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-on-surface">Gestión de Usuarios</h2>
+                    <input type="text" placeholder="Buscar usuario..." class="bg-surface-container border border-outline-variant/30 text-on-surface rounded px-4 py-2 focus:outline-none focus:border-primary w-64" id="searchInput">
+                </div>
+                <div class="card overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="text-xs text-on-surface-variant font-medium border-b border-outline-variant/20">
+                            <tr>
+                                <th class="pb-3 font-semibold">Nombre</th>
+                                <th class="pb-3 font-semibold">Email</th>
+                                <th class="pb-3 font-semibold">Transacciones</th>
+                                <th class="pb-3 font-semibold">Ingresos</th>
+                                <th class="pb-3 font-semibold">Gastos</th>
+                                <th class="pb-3 font-semibold">Balance Neto</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/10" id="users-tbody">
+                            <tr>
+                                <td class="py-3 text-on-surface-variant">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN Y VARIABLES GLOBALES
+        // ============================================
+        const API_URL = "http://localhost:3001/api";
+        let charts = {};
+        let authToken = localStorage.getItem("authToken");
+
+        // Redirigir si no hay token
+        if (!authToken) {
+            window.location.href = "/login.html";
+        }
+
+        // ============================================
+        // FUNCIONES AUXILIARES
+        // ============================================
+        function showLoading(show = true) {
+            const loader = document.getElementById("loading");
+            if (show) {
+                loader.classList.add("active");
+            } else {
+                loader.classList.remove("active");
+            }
+        }
+
+        function showError(message) {
+            const toast = document.getElementById("errorToast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 5000);
+        }
+
+        async function apiCall(endpoint, options = {}) {
+            showLoading(true);
+            try {
+                const response = await fetch(`${API_URL}${endpoint}`, {
+                    ...options,
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${authToken}`,
+                        ...options.headers,
+                    },
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || "Error en la solicitud");
+                }
+
+                return data;
+            } catch (error) {
+                showError(error.message);
+                throw error;
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat("es-GT", {
+                style: "currency",
+                currency: "GTQ",
+            }).format(value);
+        }
+
+        function navigateTo(page) {
+            // Ocultar todas las vistas
+            document.getElementById("dashboard-view").classList.add("hidden");
+            document.getElementById("users-view").classList.add("hidden");
+
+            // Mostrar vista seleccionada
+            if (page === "dashboard") {
+                document.getElementById("dashboard-view").classList.remove("hidden");
+                document.getElementById("pageTitle").textContent = "Panel de Control";
+                loadDashboard();
+            } else if (page === "users") {
+                document.getElementById("users-view").classList.remove("hidden");
+                document.getElementById("pageTitle").textContent = "Gestión de Usuarios";
+                loadUsers();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("authToken");
+            window.location.href = "/login.html";
+        }
+
+        // ============================================
+        // CARGAR DATOS DEL DASHBOARD
+        // ============================================
+        async function loadDashboard() {
+            try {
+                const response = await apiCall("/admin/dashboard");
+
+                if (!response.success) throw new Error("Error al cargar dashboard");
+
+                const { stats, cashFlow, expenseCategories, recentTransactions } = response.data;
+
+                // Actualizar tarjetas de estadísticas
+                document.getElementById("stat-users").textContent = stats.totalUsers;
+                document.getElementById("stat-transactions").textContent = stats.totalTransactions;
+                document.getElementById("stat-income").textContent = formatCurrency(stats.totalIncome);
+                document.getElementById("stat-expenses").textContent = formatCurrency(stats.totalExpenses);
+
+                // Cargar gráficas
+                loadCashFlowChart(cashFlow);
+                loadExpenseCategoryChart(expenseCategories);
+                loadRecentTransactions(recentTransactions);
+            } catch (error) {
+                console.error("Error cargando dashboard:", error);
+            }
+        }
+
+        // ============================================
+        // GRÁFICAS
+        // ============================================
+        function loadCashFlowChart(data) {
+            const ctx = document.getElementById("cashFlowChart");
+            if (!ctx) return;
+
+            // Invertir para mostrar más recientes al final
+            data = [...data].reverse();
+
+            if (charts.cashFlow) {
+                charts.cashFlow.destroy();
+            }
+
+            charts.cashFlow = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: data.map((d) => d.month),
+                    datasets: [
+                        {
+                            label: "Ingresos",
+                            data: data.map((d) => d.totalIncome),
+                            borderColor: "#98B315",
+                            backgroundColor: "rgba(152, 179, 21, 0.1)",
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointBackgroundColor: "#98B315",
+                            tension: 0.4,
+                            fill: true,
+                        },
+                        {
+                            label: "Gastos",
+                            data: data.map((d) => d.totalExpenses),
+                            borderColor: "#f87171",
+                            backgroundColor: "rgba(248, 113, 113, 0.1)",
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointBackgroundColor: "#f87171",
+                            tension: 0.4,
+                            fill: true,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: "#dde5db" },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: "#dde5db" },
+                            grid: { color: "rgba(255,255,255,0.05)" },
+                        },
+                        y: {
+                            ticks: {
+                                color: "#dde5db",
+                                callback: (v) => "Q" + (v / 1000).toFixed(0) + "k",
+                            },
+                            grid: { color: "rgba(255,255,255,0.05)" },
+                        },
+                    },
+                },
+            });
+        }
+
+        function loadExpenseCategoryChart(data) {
+            const ctx = document.getElementById("expenseCategoryChart");
+            if (!ctx) return;
+
+            if (charts.expenseCategory) {
+                charts.expenseCategory.destroy();
+            }
+
+            charts.expenseCategory = new Chart(ctx, {
+                type: "doughnut",
+                data: {
+                    labels: data.map((d) => d.category),
+                    datasets: [
+                        {
+                            data: data.map((d) => d.totalAmount),
+                            backgroundColor: [
+                                "#98B315",
+                                "#5d8a6e",
+                                "#43825F",
+                                "#344e41",
+                                "#1e2923",
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 4,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: "75%",
+                    plugins: {
+                        legend: {
+                            labels: { color: "#dde5db" },
+                        },
+                    },
+                },
+            });
+        }
+
+        // ============================================
+        // TRANSACCIONES RECIENTES
+        // ============================================
+        function loadRecentTransactions(transactions) {
+            const tbody = document.getElementById("recent-transactions-tbody");
+            tbody.innerHTML = "";
+
+            if (transactions.length === 0) {
+                tbody.innerHTML =
+                    '<tr><td class="py-3 text-on-surface-variant" colspan="5">No hay transacciones</td></tr>';
+                return;
+            }
+
+            transactions.forEach((t) => {
+                const row = tbody.insertRow();
+                row.className = "hover:bg-surface-container/50 transition-colors";
+                row.innerHTML = `
+                    <td class="py-3">${t.full_name}</td>
+                    <td class="py-3">${t.description}</td>
+                    <td class="py-3">${t.category}</td>
+                    <td class="py-3"><span class="px-2 py-1 rounded text-xs font-medium ${
+                        t.type === "income"
+                            ? "bg-tertiary/20 text-tertiary"
+                            : "bg-error/20 text-error"
+                    }">${t.type === "income" ? "Ingreso" : "Gasto"}</span></td>
+                    <td class="py-3 text-right font-medium ${t.type === "income" ? "text-tertiary" : "text-error"}">
+                        ${t.type === "income" ? "+" : "-"}${formatCurrency(Math.abs(t.amount))}
+                    </td>
+                `;
+            });
+        }
+
+        // ============================================
+        // CARGAR USUARIOS
+        // ============================================
+        async function loadUsers() {
+            try {
+                const response = await apiCall("/admin/users");
+                if (!response.success) throw new Error("Error al cargar usuarios");
+
+                const tbody = document.getElementById("users-tbody");
+                tbody.innerHTML = "";
+
+                response.data.users.forEach((user) => {
+                    const row = tbody.insertRow();
+                    row.className = "hover:bg-surface-container/50 transition-colors";
+                    row.innerHTML = `
+                        <td class="py-3">${user.full_name}</td>
+                        <td class="py-3">${user.email}</td>
+                        <td class="py-3">${user.totalTransactions}</td>
+                        <td class="py-3 text-tertiary">${formatCurrency(user.totalIncome)}</td>
+                        <td class="py-3 text-error">${formatCurrency(user.totalExpenses)}</td>
+                        <td class="py-3 font-medium ${user.netBalance >= 0 ? "text-tertiary" : "text-error"}">
+                            ${formatCurrency(user.netBalance)}
+                        </td>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error cargando usuarios:", error);
+            }
+        }
+
+        // ============================================
+        // BÚSQUEDA DE USUARIOS
+        // ============================================
+        document.getElementById("searchInput")?.addEventListener("input", async (e) => {
+            const query = e.target.value.trim();
+            if (!query) {
+                loadUsers();
+                return;
+            }
+
+            try {
+                const response = await apiCall(`/admin/users/search?q=${query}`);
+                const tbody = document.getElementById("users-tbody");
+                tbody.innerHTML = "";
+
+                response.data.forEach((user) => {
+                    const row = tbody.insertRow();
+                    row.className = "hover:bg-surface-container/50 transition-colors";
+                    row.innerHTML = `
+                        <td class="py-3">${user.full_name}</td>
+                        <td class="py-3">${user.email}</td>
+                        <td class="py-3">${user.totalTransactions}</td>
+                        <td class="py-3 text-tertiary">${formatCurrency(user.totalIncome)}</td>
+                        <td class="py-3 text-error">${formatCurrency(user.totalExpenses)}</td>
+                        <td class="py-3 font-medium ${user.netBalance >= 0 ? "text-tertiary" : "text-error"}">
+                            ${formatCurrency(user.netBalance)}
+                        </td>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error en búsqueda:", error);
+            }
+        });
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        window.addEventListener("load", () => {
+            loadDashboard();
+            // Actualizar cada 30 segundos
+            setInterval(loadDashboard, 30000);
+        });
+    </script>
+</body>
+</html>
