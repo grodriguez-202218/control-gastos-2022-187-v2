@@ -7,7 +7,7 @@ export interface Transaction {
   description: string;
   category: string;
   amount: number;
-  date: string; // ISO date string YYYY-MM-DD
+  date: string; 
   notes?: string;
   created_at?: Date;
   updated_at?: Date;
@@ -165,7 +165,6 @@ export const TransactionModel = {
     const totalExpense = parseFloat(totalRes.rows[0].total_expense);
     const balanceTotal = totalIncome - totalExpense;
 
-    // Calculamos ingresos y gastos del mes actual
     const currentMonthRes = await pool.query(
       `SELECT 
          COALESCE(SUM(CASE WHEN type IN ('income', 'ingreso') THEN amount ELSE 0 END), 0) as month_income,
@@ -179,7 +178,7 @@ export const TransactionModel = {
     const monthIncome = parseFloat(currentMonthRes.rows[0].month_income);
     const monthExpense = parseFloat(currentMonthRes.rows[0].month_expense);
 
-    const presupuestoMensual = 8000.00; // Presupuesto por defecto como en la plantilla
+    const presupuestoMensual = 8000.00; 
     const disponibleMensual = Math.max(0, presupuestoMensual - monthExpense);
 
     return {
@@ -196,7 +195,7 @@ export const TransactionModel = {
     cashFlow: { month: string; income: number; expense: number }[];
     categories: { category: string; amount: number; percentage: number }[];
   }> => {
-    // 1. Obtener flujo de caja de los últimos 12 meses
+    // Obtener flujo de caja de los últimos 12 meses
     const cashFlowRes = await pool.query(
       `SELECT 
          to_char(date, 'Mon') as month_name,
@@ -210,7 +209,6 @@ export const TransactionModel = {
       [userId]
     );
 
-    // Mapear meses en español
     const monthNamesEsMap: Record<string, string> = {
       Jan: "Ene", Feb: "Feb", Mar: "Mar", Apr: "Abr", May: "May", Jun: "Jun",
       Jul: "Jul", Aug: "Ago", Sep: "Sep", Oct: "Oct", Nov: "Nov", Dec: "Dic"
@@ -222,7 +220,7 @@ export const TransactionModel = {
       expense: parseFloat(row.expense)
     }));
 
-    // 2. Obtener gastos por categoría
+    //  Obtener gastos por categoría
     const categoriesRes = await pool.query(
       `SELECT 
          category,
