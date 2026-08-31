@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
@@ -22,8 +22,13 @@ export interface UserRecord {
 @Injectable({ providedIn: "root" })
 export class AuthService {
   private logoutTimer: ReturnType<typeof setTimeout> | undefined;
+  sessionMessage = signal<string>("");
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  clearSessionMessage = (): void => {
+    this.sessionMessage.set("");
+  };
 
   register = (data: {
     fullName: string;
@@ -41,6 +46,7 @@ export class AuthService {
         localStorage.setItem("token", res.token);
         localStorage.setItem("role", res.user.role);
         localStorage.setItem("fullName", res.user.full_name);
+        this.sessionMessage.set("Se ha iniciado sesion");
         this.scheduleAutoLogout(res.token);
       })
     );
@@ -50,8 +56,9 @@ export class AuthService {
     return this.http.get<UserRecord[]>(`${API_URL}/users`);
   };
 
-  logout = (): void => {
+  logout = (message: string = "Sesion cerrada"): void => {
     localStorage.clear();
+    this.sessionMessage.set(message);
     if (this.logoutTimer) {
       clearTimeout(this.logoutTimer);
     }
@@ -85,7 +92,7 @@ export class AuthService {
     if (!localStorage.getItem("token")) return false;
 
     if (this.isTokenExpired()) {
-      this.logout();
+      this.logout("Sesion experida");
       return false;
     }
 
@@ -103,7 +110,7 @@ export class AuthService {
     }
 
     this.logoutTimer = setTimeout(() => {
-      this.logout();
+      this.logout("Sesion experida");
       this.router.navigate(["/login"]);
     }, msUntilExpiration);
   };
