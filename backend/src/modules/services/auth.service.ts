@@ -5,7 +5,7 @@ import { UserModel, User } from "../models/user.model";
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
 const generarToken = (id: number, email: string, role: string) =>
-  jwt.sign({ id, email, role }, JWT_SECRET, { expiresIn: "1min" });
+  jwt.sign({ id, email, role }, JWT_SECRET, { expiresIn: "5min" });
 
 const formatearUsuario = (user: User) => ({
   id: user.id,
@@ -51,7 +51,15 @@ export const AuthService = {
   verifyAndRefreshToken: async (token: string) => {
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as any;
-      return { valid: true, payload: decoded };
+      const newToken = generarToken(decoded.id, decoded.email, decoded.role);
+      return {
+        token: newToken,
+        user: {
+          id: decoded.id,
+          email: decoded.email,
+          role: decoded.role,
+        },
+      };
     } catch (error: any) {
       if (error.name === "TokenExpiredError") {
         throw new Error("Sesión expirada");

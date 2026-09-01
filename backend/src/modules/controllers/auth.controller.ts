@@ -51,4 +51,22 @@ export const AuthController = {
       return res.status(500).json({ message: "Error al obtener usuarios" });
     }
   },
+
+  refreshToken: async (req: Request, res: Response) => {
+    try {
+      const authHeader = req.headers.authorization;
+      const token = authHeader?.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : req.body?.token;
+
+      if (!token) {
+        return res.status(401).json({ message: "Token no proporcionado" });
+      }
+
+      const result = await AuthService.verifyAndRefreshToken(token);
+      return res.status(200).json(result);
+    } catch (error: any) {
+      return res.status(401).json({ message: error.message });
+    }
+  },
 };

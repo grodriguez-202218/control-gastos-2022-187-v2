@@ -45,7 +45,7 @@ export const initDatabase = async (): Promise<void> => {
       updated_at TIMESTAMP DEFAULT NOW()
     );
   `);
-  console.log('✓ Tabla "users" verificada/creada.');
+  console.log(' Tabla "users" verificada/creada.');
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS transactions (
@@ -73,7 +73,7 @@ export const initDatabase = async (): Promise<void> => {
     ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_type_check;
     ALTER TABLE transactions ADD CONSTRAINT transactions_type_check CHECK (type IN ('ingreso', 'gasto', 'income', 'expense'));
   `);
-  console.log('✓ Tabla "transactions" verificada/creada con índice, columnas y constraints aseguradas.');
+  console.log(' Tabla "transactions" verificada/creada con índice, columnas y constraints aseguradas.');
 
   // Tabla de estadísticas para admin
   await pool.query(`
@@ -86,7 +86,7 @@ export const initDatabase = async (): Promise<void> => {
       updated_at TIMESTAMP DEFAULT NOW()
     );
   `);
-  console.log('✓ Tabla "admin_stats" verificada/creada.');
+  console.log(' Tabla "admin_stats" verificada/creada.');
 
   // Insertar estadísticas iniciales si no existen
   await pool.query(`
@@ -94,7 +94,7 @@ export const initDatabase = async (): Promise<void> => {
     SELECT 0, 0, 0, 0, NOW()
     WHERE NOT EXISTS (SELECT 1 FROM admin_stats LIMIT 1);
   `);
-  console.log('✓ Estadísticas iniciales verificadas.');
+  console.log(' Estadísticas iniciales verificadas.');
 
   console.log(" Base de datos inicializada correctamente");
 };
