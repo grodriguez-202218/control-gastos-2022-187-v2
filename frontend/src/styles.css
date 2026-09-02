@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #1a221c;
+  --color-brand-sidebar: #161d18;
+  --color-brand-panel: #283830;
+  --color-brand-accent: #43825f;
+  --color-brand-primary: #5d8a6e;
+  --color-brand-positive: #98b315;
+  --color-brand-text: #e2e8f0;
+  --color-brand-muted: #94a3b8;
+  --color-brand-border: #334155;
+
+  --color-on-primary-fixed: #181e00;
+  --color-on-error: #690005;
+  --color-on-tertiary: #2b3400;
+  --color-on-tertiary-fixed-variant: #404c00;
+  --color-primary-fixed: #d2ef54;
+  --color-secondary-container: #0e5435;
+  --color-on-secondary-fixed: #002111;
+  --color-secondary: #93d5ac;
+  --color-on-tertiary-container: #374100;
+  --color-surface: #0e1510;
+  --color-outline-variant: #454836;
+  --color-inverse-surface: #dde5db;
+  --color-on-background: #dde5db;
+  --color-tertiary-container: #9eb04f;
+  --color-primary: #b6d339;
+  --color-primary-fixed-dim: #b6d339;
+  --color-surface-dim: #0e1510;
+  --color-on-secondary-fixed-variant: #0a5133;
+  --color-inverse-on-surface: #2b322c;
+  --color-tertiary-fixed: #d9ec83;
+  --color-surface-container-high: #252c26;
+  --color-surface-bright: #343b35;
+  --color-tertiary: #bdcf6a;
+  --color-secondary-fixed-dim: #93d5ac;
+  --color-on-secondary: #003921;
+  --color-on-error-container: #ffdad6;
+  --color-surface-container-low: #161d18;
+  --color-on-primary-fixed-variant: #3f4c00;
+  --color-on-surface: #dde5db;
+  --color-error-container: #93000a;
+  --color-tertiary-fixed-dim: #bdcf6a;
+  --color-outline: #90937c;
+  --color-on-surface-variant: #c6c9b0;
+  --color-on-primary: #2b3400;
+  --color-inverse-primary: #556500;
+  --color-surface-container-lowest: #09100b;
+  --color-on-primary-container: #364200;
+  --color-surface-container: #1a211c;
+  --color-error: #ffb4ab;
+  --color-surface-tint: #b6d339;
+  --color-on-tertiary-fixed: #181e00;
+  --color-on-secondary-container: #85c69f;
+  --color-background: #0e1510;
+  --color-secondary-fixed: #aff1c7;
+  --color-primary-container: #98b315;
+  --color-surface-variant: #2f3730;
+  --color-surface-container-highest: #2f3730;
+
+  --spacing-base: 8px;
+  --spacing-stack-md: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-stack-lg: 40px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 480px;
+  --spacing-stack-sm: 12px;
+
+  --font-headline-lg: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-label-sm: "Inter", sans-serif;
+  --font-label-md: "Inter", sans-serif;
+  --font-headline-lg-mobile: "Inter", sans-serif;
+  --font-headline-md: "Inter", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+}
+
+/* Tamaños de texto personalizados */
+.text-headline-xl { font-size: 48px; line-height: 56px; letter-spacing: -0.02em; font-weight: 700; }
+.text-headline-lg { font-size: 32px; line-height: 40px; letter-spacing: -0.01em; font-weight: 600; }
+.text-headline-md { font-size: 24px; line-height: 32px; font-weight: 600; }
+.text-headline-sm { font-size: 20px; line-height: 28px; font-weight: 600; }
+.text-body-lg { font-size: 18px; line-height: 28px; font-weight: 400; }
+.text-body-md { font-size: 16px; line-height: 24px; font-weight: 400; }
+.text-body-sm { font-size: 14px; line-height: 20px; font-weight: 400; }
+.text-label-md { font-size: 12px; line-height: 16px; letter-spacing: 0.05em; font-weight: 600; }
+.text-label-sm { font-size: 10px; line-height: 14px; font-weight: 500; }
+
+/* Utilidades personalizadas para el diseño */
+.bg-level-1 { background-color: #325341; border: 1px solid rgba(67, 130, 95, 0.2); }
+.text-accent { color: #43825F; }
+.bg-accent { background-color: #43825F; }
+.text-income { color: #98B315; }
+.text-expense { color: #7D8F15; }
+
+.p-margin { padding: 24px; }
+.px-margin { padding-left: 24px; padding-right: 24px; }
+.mb-margin { margin-bottom: 24px; }
+.mx-margin { margin-left: 24px; margin-right: 24px; }
+.py-gutter { padding-top: 16px; padding-bottom: 16px; }
+.gap-gutter { gap: 16px; }
+
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1a221c;
+  color: #e2e8f0;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #1a221c;
+  color: #e2e8f0;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: #1a221c;
+}

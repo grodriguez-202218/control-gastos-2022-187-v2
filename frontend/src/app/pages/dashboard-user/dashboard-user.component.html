@@ -1,0 +1,363 @@
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-brand-sidebar flex flex-col justify-between h-full border-r border-brand-panel/50 shrink-0">
+  <div class="p-6">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-10 h-10 rounded-full bg-brand-panel flex items-center justify-center text-brand-positive">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold text-white tracking-tight">Aureo Lunas</h1>
+        <p class="text-xs text-brand-muted">Gestión de Gastos</p>
+      </div>
+    </div>
+    <!-- Add Expense Button -->
+    <button (click)="openModal()" class="w-full bg-brand-primary hover:bg-brand-accent text-white py-2.5 rounded-lg flex items-center justify-center gap-2 mb-8 transition-colors text-sm font-medium cursor-pointer">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Agregar Gasto/Ingreso
+    </button>
+    <!-- Navigation -->
+    <nav class="space-y-1.5">
+      <a routerLink="/dashboard" class="flex items-center gap-3 px-4 py-2.5 bg-brand-panel rounded-lg text-brand-positive font-medium border-r-4 border-brand-positive text-sm">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Panel de Control
+      </a>
+      <a routerLink="/transactions" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Transacciones
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Presupuestos
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Reportes
+      </a>
+    </nav>
+  </div>
+  <!-- Bottom Actions -->
+  <div class="p-6 space-y-1.5">
+    <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm" href="#">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ajustes
+    </a>
+    <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm" href="#">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ayuda
+    </a>
+    <div class="border-t border-brand-panel/50 pt-2 mt-2">
+      <a (click)="logout()" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm cursor-pointer">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Cerrar Sesión
+      </a>
+    </div>
+  </div>
+</aside>
+<!-- END: Sidebar -->
+
+<!-- BEGIN: Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+  <!-- BEGIN: Topbar -->
+  <header class="bg-brand-bg border-b border-brand-panel/50 h-16 flex items-center justify-between px-8 shrink-0">
+    <!-- Search -->
+    <div class="relative w-64">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-4 w-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <input class="block w-full pl-10 pr-3 py-1.5 border border-brand-panel bg-brand-sidebar rounded-full text-sm text-white placeholder-brand-muted focus:outline-none focus:ring-1 focus:ring-brand-positive focus:border-brand-positive" placeholder="Buscar..." type="text">
+    </div>
+    <!-- Navigation Tabs -->
+    <div class="flex flex-col items-center justify-center absolute left-1/2 transform -translate-x-1/2 h-full pt-2">
+      <h2 class="text-xl font-bold text-brand-primary mb-1">Tablero Financiero</h2>
+      <div class="flex space-x-6 text-sm font-medium">
+        <a class="text-brand-positive border-b-2 border-brand-positive pb-1" routerLink="/dashboard">Resumen</a>
+        <a class="text-brand-muted hover:text-white pb-1" routerLink="/transactions">Historial</a>
+        <a class="text-brand-muted/40 cursor-not-allowed pb-1">Exportar</a>
+      </div>
+    </div>
+    <!-- Actions & Profile -->
+    <div class="flex items-center gap-4">
+      <button class="bg-brand-primary hover:bg-brand-accent text-white px-4 py-1.5 rounded-full flex items-center gap-2 transition-colors text-sm font-medium cursor-pointer">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Descargar Reporte
+      </button>
+      <button class="text-brand-muted hover:text-white relative cursor-pointer">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-brand-positive ring-2 ring-brand-bg"></span>
+      </button>
+      <div class="flex items-center gap-2">
+        <span class="text-sm font-medium text-brand-text">{{ fullName }}</span>
+        <div class="h-8 w-8 rounded-full bg-brand-panel flex items-center justify-center border border-brand-panel text-brand-positive font-bold text-xs uppercase">
+          {{ fullName.substring(0,2) }}
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- END: Topbar -->
+
+  <!-- BEGIN: Dashboard Content -->
+  <div class="flex-1 overflow-y-auto p-8 space-y-6">
+    <!-- Inline Session Message -->
+    <div *ngIf="sessionMessage" class="bg-brand-panel/90 border border-brand-positive/40 text-brand-positive px-4 py-3 rounded-xl text-sm flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-2">
+        <svg class="h-5 w-5 text-brand-positive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <span class="font-medium">{{ sessionMessage }}</span>
+      </div>
+      <button (click)="clearSessionMessage()" class="text-brand-muted hover:text-white text-xs cursor-pointer p-1">✕</button>
+    </div>
+
+    <!-- Header Section -->
+    <div class="flex justify-between items-end">
+      <div>
+        <h2 class="text-3xl font-bold text-white mb-1">Resumen</h2>
+        <p class="text-brand-muted text-sm">Resumen financiero de tus movimientos.</p>
+      </div>
+      <button class="flex items-center gap-2 px-3 py-1.5 border border-brand-panel bg-brand-sidebar rounded-md text-sm text-brand-muted hover:text-white transition-colors cursor-pointer">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Histórico General
+      </button>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Balance Total -->
+      <div class="bg-brand-panel rounded-xl p-5 relative overflow-hidden">
+        <div class="relative z-10">
+          <h3 class="text-brand-muted text-sm font-medium mb-1">Balance Total</h3>
+          <div class="text-3xl font-bold text-brand-positive mb-2">
+            Q{{ (summary()?.balanceTotal || 0) | number:'1.2-2' }}
+          </div>
+          <div class="flex items-center gap-1 text-xs">
+            <span class="text-brand-positive flex items-center">
+              <svg class="h-3 w-3 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+              Activo
+            </span>
+            <span class="text-brand-muted">historial completo</span>
+          </div>
+        </div>
+        <!-- Decorative Icon -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 opacity-10">
+          <svg class="h-24 w-24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Ingresos Mensuales -->
+      <div class="bg-brand-panel rounded-xl p-5 relative">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="text-brand-muted text-sm font-medium">Ingresos (Mes Actual)</h3>
+          <div class="p-1 bg-brand-positive/20 text-brand-positive rounded-md">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="text-3xl font-bold text-white mb-3">
+          Q{{ (summary()?.ingresosTotales || 0) | number:'1.2-2' }}
+        </div>
+        <div class="flex items-center gap-4 text-xs text-brand-muted">
+          <span>Movimientos del periodo</span>
+        </div>
+      </div>
+
+      <!-- Gastos Mensuales -->
+      <div class="bg-brand-panel rounded-xl p-5 relative">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="text-brand-muted text-sm font-medium">Gastos (Mes Actual)</h3>
+          <div class="p-1 bg-red-500/20 text-red-400 rounded-md">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="text-3xl font-bold text-white mb-3">
+          Q{{ (summary()?.gastosTotales || 0) | number:'1.2-2' }}
+        </div>
+        <div class="w-full bg-brand-sidebar rounded-full h-1.5 mb-2 overflow-hidden flex">
+          <div class="bg-brand-primary h-1.5 rounded-full" [style.width]="getProgressBarWidth()"></div>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-brand-muted font-medium">Q{{ (summary()?.presupuestoMensual || 0) | number:'1.2-2' }} presupuesto</span>
+          <span class="text-brand-positive font-medium">Q{{ (summary()?.disponibleMensual || 0) | number:'1.2-2' }} disponible</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-cols-3 gap-6 h-72">
+      <!-- Flujo de Caja (Line Chart) -->
+      <div class="col-span-2 bg-brand-panel rounded-xl p-5 flex flex-col relative">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-lg font-medium text-white">Flujo de Caja</h3>
+        </div>
+        <div class="flex-1 relative w-full h-full">
+          <canvas #cashFlowChartRef></canvas>
+        </div>
+      </div>
+
+      <!-- Gastos por Categoría (Doughnut Chart) -->
+      <div class="col-span-1 bg-brand-panel rounded-xl p-5 flex flex-col relative">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-lg font-medium text-white">Gastos por Categoría</h3>
+        </div>
+        <div class="flex-1 relative w-full h-full flex items-center justify-center">
+          <canvas #categoryChartRef></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Transactions Table -->
+    <div class="bg-brand-panel rounded-xl p-5">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-medium text-white">Transacciones Recientes</h3>
+        <a class="text-sm font-medium text-brand-positive hover:underline" routerLink="/transactions">Ver Todo</a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="text-xs text-brand-muted font-medium border-b border-brand-sidebar">
+            <tr>
+              <th class="pb-3 font-semibold" scope="col">Fecha</th>
+              <th class="pb-3 font-semibold" scope="col">Descripción</th>
+              <th class="pb-3 font-semibold" scope="col">Categoría</th>
+              <th class="pb-3 font-semibold" scope="col">Tipo</th>
+              <th class="pb-3 font-semibold text-right" scope="col">Monto</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-sidebar text-brand-text">
+            @for (tx of recentTransactions(); track tx.id) {
+              <tr class="hover:bg-brand-sidebar/50 transition-colors">
+                <td class="py-4">{{ tx.date | date:'dd LLL, yyyy' }}</td>
+                <td class="py-4">
+                  <div class="flex items-center gap-2">
+                    <svg class="h-4 w-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    {{ tx.description }}
+                  </div>
+                </td>
+                <td class="py-4">{{ tx.category }}</td>
+                <td class="py-4">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-medium border"
+                    [ngClass]="{
+                      'bg-red-500/10 text-red-400 border-red-500/20': tx.type === 'expense',
+                      'bg-brand-positive/10 text-brand-positive border-brand-positive/20': tx.type === 'income'
+                    }">
+                    {{ tx.type === 'expense' ? 'Gasto' : 'Ingreso' }}
+                  </span>
+                </td>
+                <td class="py-4 text-right" [ngClass]="{'text-brand-positive': tx.type === 'income'}">
+                  {{ tx.type === 'expense' ? '-' : '+' }}Q{{ tx.amount | number:'1.2-2' }}
+                </td>
+              </tr>
+            }
+            @if (recentTransactions().length === 0) {
+              <tr>
+                <td colspan="5" class="py-6 text-center text-brand-muted text-sm">
+                  No hay transacciones registradas. ¡Comienza agregando un gasto!
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- END: Dashboard Content -->
+</main>
+<!-- END: Main Content -->
+
+<!-- Modal de Agregar Gasto/Transacción -->
+<div *ngIf="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-brand-sidebar border border-brand-panel rounded-xl max-w-md w-full p-6 space-y-4">
+    <div class="flex justify-between items-center border-b border-brand-panel/50 pb-3">
+      <h3 class="text-lg font-bold text-white">Agregar Transacción</h3>
+      <button (click)="closeModal()" class="text-brand-muted hover:text-white cursor-pointer">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+      </button>
+    </div>
+    
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmitTransaction()" class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Tipo</label>
+        <select formControlName="type" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          <option value="expense">Gasto</option>
+          <option value="income">Ingreso</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Descripción</label>
+        <input type="text" formControlName="description" placeholder="Ej. Delta Airlines" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Categoría</label>
+        <select formControlName="category" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          <option value="Viajes">Viajes</option>
+          <option value="Comestibles">Comestibles</option>
+          <option value="Ropa">Ropa</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Servicios">Servicios</option>
+          <option value="Salario">Salario</option>
+          <option value="Freelance">Freelance</option>
+          <option value="Otros">Otros</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Monto (Q)</label>
+        <input type="number" step="0.01" formControlName="amount" placeholder="0.00" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Fecha</label>
+        <input type="date" formControlName="date" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Notas (Opcional)</label>
+        <textarea formControlName="notes" placeholder="Notas adicionales..." rows="2" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive"></textarea>
+      </div>
+
+      <div *ngIf="modalError" class="text-xs text-red-400">{{ modalError }}</div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" (click)="closeModal()" class="px-4 py-2 border border-brand-panel rounded-lg text-sm text-brand-muted hover:text-white transition-colors cursor-pointer">Cancelar</button>
+        <button type="submit" [disabled]="transactionForm.invalid" class="px-4 py-2 bg-brand-primary hover:bg-brand-accent text-white rounded-lg text-sm font-medium transition-colors cursor-pointer disabled:opacity-50">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
