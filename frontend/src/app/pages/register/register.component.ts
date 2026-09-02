@@ -27,7 +27,7 @@ export class RegisterComponent {
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(6)]],
       confirmPassword: ["", Validators.required],
-      role: ["user", Validators.required],
+      role: ["", Validators.required],
     });
 
     this.blobsData = generateBlobs();
@@ -49,12 +49,25 @@ export class RegisterComponent {
   };
 
   setRole = (role: string): void => {
-    this.registerForm.patchValue({ role });
+    const currentRole = this.registerForm.get("role")?.value;
+    if (currentRole === role) {
+      this.registerForm.patchValue({ role: "" });
+    } else {
+      this.registerForm.patchValue({ role });
+    }
   };
 
   onSubmit = (): void => {
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid) {
+      if (!this.registerForm.get("role")?.value) {
+        this.errorMessage = "Por favor selecciona un rol (Usuario o Admin)";
+      } else {
+        this.errorMessage = "Por favor completa todos los campos correctamente";
+      }
+      return;
+    }
 
+    this.errorMessage = "";
     this.authService.register(this.registerForm.value).subscribe({
       next: () => this.router.navigate(["/login"]),
       error: (err) => {

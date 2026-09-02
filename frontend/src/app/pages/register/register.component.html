@@ -36,8 +36,20 @@
         <div class="form-group">
           <label>Rol</label>
           <div class="role-buttons">
-            <button class="role-btn" (click)="setRole('user')">Usuario</button>
-            <button class="role-btn" (click)="setRole('admin')">Admin</button>
+            <button
+              type="button"
+              class="role-btn"
+              [class.active]="registerForm.get('role')?.value === 'user'"
+              (click)="setRole('user')">
+              Usuario
+            </button>
+            <button
+              type="button"
+              class="role-btn"
+              [class.active]="registerForm.get('role')?.value === 'admin'"
+              (click)="setRole('admin')">
+              Admin
+            </button>
           </div>
         </div>
 
