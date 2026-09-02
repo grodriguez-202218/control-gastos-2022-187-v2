@@ -22,25 +22,25 @@
     </button>
     <!-- Navigation -->
     <nav class="space-y-1.5">
-      <a routerLink="/dashboard" class="flex items-center gap-3 px-4 py-2.5 bg-brand-panel rounded-lg text-brand-positive font-medium border border-brand-positive/20 text-sm">
+      <a routerLink="/dashboard" class="flex items-center gap-3 px-4 py-2.5 bg-brand-panel rounded-lg text-brand-positive font-medium border-r-4 border-brand-positive text-sm">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
         Panel de Control
       </a>
-      <a routerLink="/transactions" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm">
+      <a routerLink="/transactions" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
         Transacciones
       </a>
-      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm">
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
         Presupuestos
       </a>
-      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm">
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
@@ -49,7 +49,7 @@
     </nav>
   </div>
   <!-- Bottom Actions -->
-  <div class="p-6 space-y-1.5 border-t border-brand-panel/50">
+  <div class="p-6 space-y-1.5">
     <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm" href="#">
       <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
@@ -63,12 +63,14 @@
       </svg>
       Ayuda
     </a>
-    <a (click)="logout()" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm mt-4 cursor-pointer">
-      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-      </svg>
-      Cerrar Sesión
-    </a>
+    <div class="border-t border-brand-panel/50 pt-2 mt-2">
+      <a (click)="logout()" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm cursor-pointer">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Cerrar Sesión
+      </a>
+    </div>
   </div>
 </aside>
 <!-- END: Sidebar -->
