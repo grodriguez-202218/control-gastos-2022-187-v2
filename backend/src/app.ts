@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import authRouter from "./modules/routers/auth.router";
 import transactionRouter from "./modules/routers/transaction.router";
+import budgetRouter from "./modules/routers/budget.router";
 import { initDatabase } from "./config/initDb";
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.on("mount", async () => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/transactions", transactionRouter);
+app.use("/api/budgets", budgetRouter);
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({ 
