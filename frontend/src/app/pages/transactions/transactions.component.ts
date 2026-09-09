@@ -14,6 +14,8 @@ import { ExpenseService, ExpenseInterface, ExpenseSummaryInterface } from "../..
 })
 export class TransactionsComponent implements OnInit {
   fullName = "";
+  email = "";
+  avatarUrl = "";
   summary = signal<ExpenseSummaryInterface | null>(null);
   transactions = signal<ExpenseInterface[]>([]);
   
@@ -25,7 +27,7 @@ export class TransactionsComponent implements OnInit {
 
   // Paginación
   currentPage = 1;
-  pageSize = 5; // tamaño de página de 5 para facilitar la visualización
+  pageSize = 5; 
   totalTransactions = 0;
   totalPages = 1;
   showingStart = 0;
@@ -60,6 +62,9 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fullName = localStorage.getItem("fullName") || "Usuario";
+    this.email = localStorage.getItem("email") || "";
+    this.avatarUrl = localStorage.getItem("avatarUrl") || this.authService.avatarUrl() || "";
+
     const token = localStorage.getItem("token");
     if (token && !this.authService.isTokenExpired()) {
       this.authService.scheduleAutoLogout(token);
@@ -132,7 +137,6 @@ export class TransactionsComponent implements OnInit {
     this.loadTransactions();
   }
 
-  // Paginación
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -162,7 +166,6 @@ export class TransactionsComponent implements OnInit {
     return pages;
   }
 
-  // CRUD
   openAddModal(): void {
     this.isEditMode = false;
     this.editingId = null;
@@ -183,7 +186,6 @@ export class TransactionsComponent implements OnInit {
     this.editingId = tx.id || null;
     this.modalError = "";
     
-    // Formatear fecha para el input date (YYYY-MM-DD)
     let formattedDate = "";
     if (tx.date) {
       formattedDate = new Date(tx.date).toISOString().split("T")[0];
