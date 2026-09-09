@@ -23,3 +23,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #43825F;
 }
+
+.amount-input {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
