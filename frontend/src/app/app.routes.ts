@@ -4,6 +4,7 @@ import { RegisterComponent } from "./pages/register/register.component";
 import { DashboardAdminComponent } from "./pages/dashboard-admin/dashboard-admin.component";
 import { DashboardUserComponent } from "./pages/dashboard-user/dashboard-user.component";
 import { TransactionsComponent } from "./pages/transactions/transactions.component";
+import { BudgetsComponent } from "./pages/budgets/budgets.component";
 import { authGuard } from "./core/guards/auth-guard";
 
 export const routes: Routes = [
@@ -20,6 +21,16 @@ export const routes: Routes = [
     path: "transactions",
     component: TransactionsComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: "budgets",
+    component: BudgetsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: "presupuestos",
+    redirectTo: "budgets",
+    pathMatch: "full",
   },
   {
     path: "dashboard",
