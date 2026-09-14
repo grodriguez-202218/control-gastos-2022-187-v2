@@ -24,6 +24,14 @@
         <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
 
         <button type="submit" class="btn-base">Iniciar Sesión</button>
+
+        <div class="auth-divider">
+          <span>O continúa con</span>
+        </div>
+
+        <div class="google-btn-container">
+          <div #googleBtnRef class="google-btn-slot"></div>
+        </div>
       </form>
 
       <footer class="footer-nav">

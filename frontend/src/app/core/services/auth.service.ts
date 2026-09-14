@@ -3,12 +3,20 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
+import { GoogleTokenPayload, GoogleUser } from "../models/google-user.model";
 
 const API_URL = "http://localhost:3000/api/auth";
 
 export interface LoginResponse {
   token: string;
-  user: { id: number; full_name: string; email: string; role: "user" | "admin" };
+  user: {
+    id: number;
+    full_name: string;
+    email: string;
+    role: "user" | "admin";
+    avatar_url?: string;
+    google_id?: string;
+  };
 }
 
 export interface UserRecord {
@@ -17,6 +25,7 @@ export interface UserRecord {
   email: string;
   role: "user" | "admin";
   created_at: string;
+  avatar_url?: string;
 }
 
 @Injectable({ providedIn: "root" })
@@ -28,6 +37,25 @@ export class AuthService {
   private readonly activityEvents = ["mousemove", "mousedown", "keydown", "touchstart", "scroll", "click"];
 
   sessionMessage = signal<string>("");
+  avatarUrl = signal<string>(typeof localStorage !== "undefined" ? localStorage.getItem("avatarUrl") || "" : "");
+  currentUser = signal<GoogleUser | null>(this.getStoredGoogleUser());
+
+  private getStoredGoogleUser(): GoogleUser | null {
+    if (typeof localStorage === "undefined") return null;
+    const googleId = localStorage.getItem("googleId");
+    const email = localStorage.getItem("email");
+    const fullName = localStorage.getItem("fullName");
+    const picture = localStorage.getItem("avatarUrl") || "";
+    if (!googleId && !picture) return null;
+    return {
+      googleId: googleId || "",
+      fullName: fullName || "",
+      firstName: fullName?.split(" ")[0] || "",
+      lastName: fullName?.split(" ").slice(1).join(" ") || "",
+      email: email || "",
+      picture,
+    };
+  }
 
   constructor(
     private http: HttpClient,
@@ -88,13 +116,92 @@ export class AuthService {
     return this.http.get<UserRecord[]>(`${API_URL}/users`);
   };
 
+  loginWithGoogle = (credential: string): Observable<LoginResponse> => {
+    return this.http.post<LoginResponse>(`${API_URL}/google`, { credential }).pipe(
+      tap((res) => {
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("role", res.user.role);
+        localStorage.setItem("fullName", res.user.full_name);
+        localStorage.setItem("email", res.user.email);
+        if (res.user.avatar_url) {
+          localStorage.setItem("avatarUrl", res.user.avatar_url);
+          this.avatarUrl.set(res.user.avatar_url);
+        }
+        if (res.user.google_id) {
+          localStorage.setItem("googleId", res.user.google_id);
+        }
+        this.sessionMessage.set(`Bienvenido, ${res.user.full_name}`);
+        this.scheduleAutoLogout(res.token);
+        this.setupActivityListeners();
+      })
+    );
+  };
+
+  decodeGoogleToken = (token: string): GoogleTokenPayload | null => {
+    try {
+      const base64Url = token.split(".")[1];
+      if (!base64Url) return null;
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+          .join("")
+      );
+      return JSON.parse(jsonPayload) as GoogleTokenPayload;
+    } catch (err) {
+      console.error("Error al decodificar token de Google:", err);
+      return null;
+    }
+  };
+
+  extractGoogleUser = (payload: GoogleTokenPayload): GoogleUser => {
+    const firstName = payload.given_name || payload.name?.split(" ")[0] || "";
+    const lastName = payload.family_name || payload.name?.split(" ").slice(1).join(" ") || "";
+    const fullName = payload.name || `${firstName} ${lastName}`.trim() || "Usuario Google";
+
+    return {
+      googleId: payload.sub,
+      firstName,
+      lastName,
+      fullName,
+      email: payload.email,
+      picture: payload.picture || "",
+    };
+  };
+
+  saveGoogleUserSession = (googleUser: GoogleUser, token?: string, role: "user" | "admin" = "user"): void => {
+    if (token) {
+      localStorage.setItem("token", token);
+      this.scheduleAutoLogout(token);
+      this.setupActivityListeners();
+    }
+    localStorage.setItem("googleId", googleUser.googleId);
+    localStorage.setItem("fullName", googleUser.fullName);
+    localStorage.setItem("email", googleUser.email);
+    localStorage.setItem("avatarUrl", googleUser.picture);
+    localStorage.setItem("role", role);
+
+    this.currentUser.set(googleUser);
+    this.avatarUrl.set(googleUser.picture);
+    this.sessionMessage.set(`Bienvenido, ${googleUser.firstName || googleUser.fullName}`);
+  };
+
   logout = (message: string = "Sesion cerrada"): void => {
     localStorage.clear();
     this.removeActivityListeners();
     this.sessionMessage.set(message);
+    this.avatarUrl.set("");
+    this.currentUser.set(null);
     if (this.logoutTimer) {
       clearTimeout(this.logoutTimer);
       this.logoutTimer = undefined;
+    }
+    if (typeof window !== "undefined" && (window as any).google?.accounts?.id) {
+      try {
+        (window as any).google.accounts.id.disableAutoSelect();
+      } catch (e) {
+      }
     }
   };
 
@@ -160,7 +267,6 @@ export class AuthService {
     if (!token) return;
 
     const now = Date.now();
-    // Throttle checks to once every 10 seconds
     if (now - this.lastActivityCheck < 10000) {
       return;
     }
@@ -176,7 +282,6 @@ export class AuthService {
     if (!expiration) return;
 
     const msUntilExpiration = expiration - now;
-    // If less than 4 minutes remaining of the token lifetime (or token is <= 80% to expiration), refresh it
     if (msUntilExpiration < 240000 && !this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshToken().subscribe({

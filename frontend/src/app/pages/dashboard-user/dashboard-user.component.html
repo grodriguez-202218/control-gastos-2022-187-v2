@@ -34,7 +34,7 @@
         </svg>
         Transacciones
       </a>
-      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
+      <a routerLink="/budgets" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
@@ -94,7 +94,7 @@
       <div class="flex space-x-6 text-sm font-medium">
         <a class="text-brand-positive border-b-2 border-brand-positive pb-1" routerLink="/dashboard">Resumen</a>
         <a class="text-brand-muted hover:text-white pb-1" routerLink="/transactions">Historial</a>
-        <a class="text-brand-muted/40 cursor-not-allowed pb-1">Exportar</a>
+        <a class="text-brand-muted hover:text-white pb-1" routerLink="/budgets">Presupuestos</a>
       </div>
     </div>
     <!-- Actions & Profile -->
@@ -112,8 +112,12 @@
         <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-brand-positive ring-2 ring-brand-bg"></span>
       </button>
       <div class="flex items-center gap-2">
-        <span class="text-sm font-medium text-brand-text">{{ fullName }}</span>
-        <div class="h-8 w-8 rounded-full bg-brand-panel flex items-center justify-center border border-brand-panel text-brand-positive font-bold text-xs uppercase">
+        <div class="flex flex-col text-right">
+          <span class="text-sm font-medium text-brand-text">{{ fullName }}</span>
+          <span *ngIf="email" class="text-xs text-brand-muted">{{ email }}</span>
+        </div>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" [alt]="fullName" class="h-8 w-8 rounded-full object-cover border border-brand-positive" referrerpolicy="no-referrer" />
+        <div *ngIf="!avatarUrl" class="h-8 w-8 rounded-full bg-brand-panel flex items-center justify-center border border-brand-panel text-brand-positive font-bold text-xs uppercase">
           {{ fullName.substring(0,2) }}
         </div>
       </div>
@@ -279,7 +283,7 @@
                   </span>
                 </td>
                 <td class="py-4 text-right" [ngClass]="{'text-brand-positive': tx.type === 'income'}">
-                  {{ tx.type === 'expense' ? '-' : '+' }}Q{{ tx.amount | number:'1.2-2' }}
+                  Q{{ tx.amount | number:'1.2-2' }}
                 </td>
               </tr>
             }
@@ -339,7 +343,7 @@
 
       <div>
         <label class="block text-xs font-semibold uppercase text-brand-muted mb-1">Monto (Q)</label>
-        <input type="number" step="0.01" formControlName="amount" placeholder="0.00" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+        <input type="number" step="0.01" min="0" formControlName="amount" placeholder="0.00" class="amount-input w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
       </div>
 
       <div>
