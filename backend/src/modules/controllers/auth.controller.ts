@@ -69,4 +69,19 @@ export const AuthController = {
       return res.status(401).json({ message: error.message });
     }
   },
+
+  googleLogin: async (req: Request, res: Response) => {
+    try {
+      const { credential } = req.body;
+
+      if (!credential) {
+        return res.status(400).json({ message: "La credencial de Google es obligatoria" });
+      }
+
+      const result = await AuthService.googleLogin(credential);
+      return res.status(200).json(result);
+    } catch (error: any) {
+      return res.status(401).json({ message: error.message || "Error al autenticar con Google" });
+    }
+  },
 };

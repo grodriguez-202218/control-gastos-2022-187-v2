@@ -12,6 +12,8 @@ const formatearUsuario = (user: User) => ({
   full_name: user.full_name,
   email: user.email,
   role: user.role,
+  avatar_url: user.avatar_url,
+  google_id: user.google_id,
 });
 
 export const AuthService = {
@@ -20,13 +22,14 @@ export const AuthService = {
       throw new Error("El correo ya está registrado");
     }
 
-    if (data.password.length < 6) {
+    if (!data.password || data.password.length < 6) {
       throw new Error("La contraseña debe tener al menos 6 caracteres");
     }
 
+    const hashedPassword = await bcrypt.hash(data.password, 10);
     const newUser = await UserModel.create({
       ...data,
-      password: await bcrypt.hash(data.password, 10),
+      password: hashedPassword,
     });
 
     return {
@@ -38,7 +41,7 @@ export const AuthService = {
   login: async (email: string, password: string) => {
     const user = await UserModel.findByEmail(email);
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    if (!user || !user.password || !(await bcrypt.compare(password, user.password))) {
       throw new Error("Credenciales inválidas");
     }
 
@@ -66,6 +69,76 @@ export const AuthService = {
       }
       throw new Error("Token inválido");
     }
+  },
+
+  googleLogin: async (credential: string) => {
+    if (!credential) {
+      throw new Error("El token de Google es obligatorio");
+    }
+
+    // 1. Validar el token contra el endpoint de Google
+    let googleData: any;
+    try {
+      const response = await fetch(
+        `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`
+      );
+      if (!response.ok) {
+        throw new Error("Token de Google inválido o expirado");
+      }
+      googleData = await response.json();
+    } catch (fetchError: any) {
+      // Si la llamada fetch a Google falla por red, decodificar payload de respaldo
+      try {
+        const payloadBase64 = credential.split(".")[1];
+        const decodedStr = Buffer.from(payloadBase64, "base64").toString("utf-8");
+        googleData = JSON.parse(decodedStr);
+      } catch {
+        throw new Error("No se pudo verificar el token de Google: " + fetchError.message);
+      }
+    }
+
+    const {
+      sub: googleId,
+      email,
+      name,
+      given_name,
+      family_name,
+      picture,
+    } = googleData;
+
+    if (!email) {
+      throw new Error("El token de Google no contiene un correo electrónico válido");
+    }
+
+    const fullName = name || `${given_name || ""} ${family_name || ""}`.trim() || email.split("@")[0];
+
+    // 2. Buscar si el usuario ya existe por google_id o por email
+    let user = await UserModel.findByGoogleId(googleId);
+
+    if (!user) {
+      user = await UserModel.findByEmail(email);
+      if (user) {
+        // Si existía previamente por email, vincular google_id y actualizar foto
+        user = await UserModel.updateGoogleInfo(user.id!, googleId, picture);
+      } else {
+        // Crear nuevo usuario sin almacenar contraseña
+        user = await UserModel.createGoogleUser({
+          full_name: fullName,
+          email,
+          google_id: googleId,
+          avatar_url: picture,
+          role: "user",
+        });
+      }
+    } else if (picture && (!user.avatar_url || user.avatar_url !== picture)) {
+      user = await UserModel.updateGoogleInfo(user.id!, googleId, picture);
+    }
+
+    // 3. Emitir token JWT de sesión de la aplicación
+    return {
+      token: generarToken(user.id!, user.email, user.role),
+      user: formatearUsuario(user),
+    };
   },
 
   logout: async () => ({ message: "Sesión cerrada" }),

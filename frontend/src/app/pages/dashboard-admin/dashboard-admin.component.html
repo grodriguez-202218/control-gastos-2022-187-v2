@@ -522,7 +522,7 @@
                             : "bg-error/20 text-error"
                     }">${t.type === "income" ? "Ingreso" : "Gasto"}</span></td>
                     <td class="py-3 text-right font-medium ${t.type === "income" ? "text-tertiary" : "text-error"}">
-                        ${t.type === "income" ? "+" : "-"}${formatCurrency(Math.abs(t.amount))}
+                        ${formatCurrency(Math.abs(t.amount))}
                     </td>
                 `;
             });

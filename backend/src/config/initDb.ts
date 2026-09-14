@@ -32,18 +32,23 @@ export const initDatabase = async (): Promise<void> => {
 
   await adminClient.end();
 
-  // Tabla de usuarios
+  // Tabla de usuarios (soporte para credenciales locales y Google OAuth)
   await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       full_name VARCHAR(150) NOT NULL,
       email VARCHAR(150) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL,
+      password VARCHAR(255),
       role VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
+      google_id VARCHAR(255),
+      avatar_url TEXT,
       is_active BOOLEAN DEFAULT true,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
     );
+    ALTER TABLE users ALTER COLUMN password DROP NOT NULL;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS google_id VARCHAR(255);
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url TEXT;
   `);
   console.log(' Tabla "users" verificada/creada.');
 
@@ -74,6 +79,43 @@ export const initDatabase = async (): Promise<void> => {
     ALTER TABLE transactions ADD CONSTRAINT transactions_type_check CHECK (type IN ('ingreso', 'gasto', 'income', 'expense'));
   `);
   console.log(' Tabla "transactions" verificada/creada con índice, columnas y constraints aseguradas.');
+
+  // Tabla de presupuestos y metas
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS budgets (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      category VARCHAR(100) NOT NULL,
+      amount NUMERIC(12,2) NOT NULL CHECK (amount > 0),
+      current_amount NUMERIC(12,2) NOT NULL DEFAULT 0,
+      type VARCHAR(20) NOT NULL DEFAULT 'goal' CHECK (type IN ('goal', 'expense_limit')),
+      month VARCHAR(7) NOT NULL,
+      notes TEXT,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW(),
+      UNIQUE(user_id, category, month)
+    );
+    ALTER TABLE budgets ADD COLUMN IF NOT EXISTS type VARCHAR(20) NOT NULL DEFAULT 'goal';
+    ALTER TABLE budgets ADD COLUMN IF NOT EXISTS current_amount NUMERIC(12,2) NOT NULL DEFAULT 0;
+  `);
+  await pool.query(`
+    CREATE INDEX IF NOT EXISTS idx_budgets_user_month ON budgets (user_id, month);
+  `);
+
+  // Tabla de abonos / aportaciones a metas
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS budget_contributions (
+      id SERIAL PRIMARY KEY,
+      budget_id INTEGER NOT NULL REFERENCES budgets(id) ON DELETE CASCADE,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      amount NUMERIC(12,2) NOT NULL CHECK (amount > 0),
+      date DATE NOT NULL DEFAULT CURRENT_DATE,
+      notes TEXT,
+      created_at TIMESTAMP DEFAULT NOW()
+    );
+    CREATE INDEX IF NOT EXISTS idx_budget_contributions_budget_id ON budget_contributions (budget_id);
+  `);
+  console.log(' Tablas "budgets" y "budget_contributions" verificadas/creadas con soporte de abonos.');
 
   // Tabla de estadísticas para admin
   await pool.query(`

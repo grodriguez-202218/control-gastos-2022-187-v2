@@ -1,0 +1,547 @@
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-brand-sidebar flex flex-col justify-between h-full border-r border-brand-panel/50 shrink-0">
+  <div class="p-6">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-10 h-10 rounded-full bg-brand-panel flex items-center justify-center text-brand-positive">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold text-white tracking-tight">Aureo Lunas</h1>
+        <p class="text-xs text-brand-muted">Gestión de Gastos</p>
+      </div>
+    </div>
+
+    <!-- Quick Action Button -->
+    <button (click)="openCreateModal()" class="w-full bg-brand-primary hover:bg-brand-accent text-white py-2.5 rounded-lg flex items-center justify-center gap-2 mb-8 transition-colors text-sm font-medium cursor-pointer shadow-lg shadow-brand-primary/20">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Nueva Meta
+    </button>
+
+    <!-- Navigation -->
+    <nav class="space-y-1.5">
+      <a routerLink="/dashboard" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Panel de Control
+      </a>
+
+      <a routerLink="/transactions" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Transacciones
+      </a>
+
+      <!-- Presupuestos Activo -->
+      <a routerLink="/budgets" class="flex items-center gap-3 px-4 py-2.5 bg-brand-panel rounded-lg text-brand-positive font-medium border-r-4 border-brand-positive text-sm">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Presupuestos
+      </a>
+
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Reportes
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bottom Actions -->
+  <div class="p-6 space-y-1.5">
+    <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm" href="#">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ajustes
+    </a>
+
+    <div class="border-t border-brand-panel/50 pt-2 mt-2">
+      <a (click)="logout()" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm cursor-pointer">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Cerrar Sesión
+      </a>
+    </div>
+  </div>
+</aside>
+<!-- END: Sidebar -->
+
+<!-- BEGIN: Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+  <!-- BEGIN: Topbar -->
+  <header class="bg-brand-bg border-b border-brand-panel/50 h-16 flex items-center justify-between px-8 shrink-0 relative">
+    <!-- Search / Title -->
+    <div class="flex items-center gap-4">
+      <div class="relative w-64">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="h-4 w-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input [(ngModel)]="searchTerm" class="block w-full pl-10 pr-3 py-1.5 border border-brand-panel bg-brand-sidebar rounded-full text-sm text-white placeholder-brand-muted focus:outline-none focus:ring-1 focus:ring-brand-positive focus:border-brand-positive" placeholder="Buscar meta o nota..." type="text">
+      </div>
+    </div>
+
+    <!-- Center Navigation Tabs -->
+    <div class="flex flex-col items-center justify-center absolute left-1/2 transform -translate-x-1/2 h-full pt-2">
+      <h2 class="text-xl font-bold text-brand-primary mb-1">Presupuestos y Metas</h2>
+      <div class="flex space-x-6 text-sm font-medium">
+        <a class="text-brand-muted hover:text-white pb-1" routerLink="/dashboard">Resumen</a>
+        <a class="text-brand-muted hover:text-white pb-1" routerLink="/transactions">Historial</a>
+        <a class="text-brand-positive border-b-2 border-brand-positive pb-1" routerLink="/budgets">Presupuestos</a>
+      </div>
+    </div>
+
+    <!-- Actions & Profile -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col text-right">
+          <span class="text-sm font-medium text-brand-text">{{ fullName }}</span>
+          <span *ngIf="email" class="text-xs text-brand-muted">{{ email }}</span>
+        </div>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" [alt]="fullName" class="h-8 w-8 rounded-full object-cover border border-brand-positive" referrerpolicy="no-referrer" />
+        <div *ngIf="!avatarUrl" class="h-8 w-8 rounded-full bg-brand-panel flex items-center justify-center border border-brand-panel text-brand-positive font-bold text-xs uppercase">
+          {{ fullName.substring(0,2) }}
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- END: Topbar -->
+
+  <!-- BEGIN: Budgets Dashboard Body -->
+  <div class="flex-1 overflow-y-auto p-8 space-y-6">
+    <!-- Session Message Alert -->
+    <div *ngIf="sessionMessage" class="bg-brand-panel/90 border border-brand-positive/40 text-brand-positive px-4 py-3 rounded-xl text-sm flex items-center justify-between shadow-lg animate-fade-in">
+      <div class="flex items-center gap-2">
+        <svg class="h-5 w-5 text-brand-positive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <span class="font-medium">{{ sessionMessage }}</span>
+      </div>
+      <button (click)="clearSessionMessage()" class="text-brand-muted hover:text-white text-xs cursor-pointer p-1">✕</button>
+    </div>
+
+    <!-- Header & Period Selector -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-brand-sidebar/80 border border-brand-panel/50 rounded-2xl p-6 backdrop-blur-sm shadow-xl">
+      <div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Metas de Ahorro y Presupuestos</h2>
+        <p class="text-sm text-brand-muted mt-1">
+          Abona a tus metas deseadas y mantén tus gastos bajo control.
+        </p>
+      </div>
+
+      <!-- Month Selector Toolbar -->
+      <div class="flex items-center gap-2 bg-brand-panel/60 p-1.5 rounded-xl border border-brand-panel">
+        <button (click)="previousMonth()" class="p-2 hover:bg-brand-panel text-brand-muted hover:text-white rounded-lg transition-colors cursor-pointer" title="Mes anterior">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </button>
+
+        <div class="px-4 py-1 text-center min-w-[160px]">
+          <span class="text-base font-bold text-brand-positive">{{ getMonthLabel(currentMonth()) }}</span>
+        </div>
+
+        <button (click)="nextMonth()" class="p-2 hover:bg-brand-panel text-brand-muted hover:text-white rounded-lg transition-colors cursor-pointer" title="Mes siguiente">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </button>
+
+        <button (click)="resetCurrentMonth()" class="ml-2 px-3 py-1.5 bg-brand-panel hover:bg-brand-primary/40 text-brand-muted hover:text-white text-xs rounded-lg transition-colors cursor-pointer font-medium">
+          Hoy
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Card 1: Total en Metas -->
+      <div class="bg-brand-sidebar border border-brand-panel/60 rounded-xl p-5 relative overflow-hidden shadow-lg group hover:border-brand-positive/50 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-semibold text-brand-muted uppercase tracking-wider">Objetivo en Metas</span>
+          <div class="p-2 bg-brand-panel rounded-lg text-brand-positive">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="text-2xl font-black text-white">
+          Q{{ (summary()?.totalBudget || 0) | number:'1.2-2' }}
+        </div>
+        <p class="text-xs text-brand-muted mt-2">
+          {{ summary()?.budgetsCount || 0 }} metas y límites activos
+        </p>
+      </div>
+
+      <!-- Card 2: Total Abonado / Ahorrado -->
+      <div class="bg-brand-sidebar border border-brand-panel/60 rounded-xl p-5 relative overflow-hidden shadow-lg group hover:border-brand-positive/50 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-semibold text-brand-muted uppercase tracking-wider">Total Abonado</span>
+          <div class="p-2 bg-brand-panel rounded-lg text-brand-positive">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="text-2xl font-black text-brand-positive">
+          Q{{ (summary()?.totalSpent || 0) | number:'1.2-2' }}
+        </div>
+        <div class="flex items-center gap-2 mt-2">
+          <span class="text-xs font-medium text-brand-positive">{{ summary()?.percentage || 0 }}% alcanzado</span>
+          <div class="flex-1 bg-brand-panel h-1.5 rounded-full overflow-hidden">
+            <div class="bg-brand-positive h-full rounded-full transition-all duration-500" [style.width.%]="summary()?.percentage || 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Faltante para Cumplir Metas -->
+      <div class="bg-brand-sidebar border border-brand-panel/60 rounded-xl p-5 relative overflow-hidden shadow-lg group hover:border-brand-positive/50 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-semibold text-brand-muted uppercase tracking-wider">Faltante por Abonar</span>
+          <div class="p-2 bg-brand-panel rounded-lg text-yellow-400">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="text-2xl font-black text-white">
+          Q{{ (summary()?.totalRemaining || 0) | number:'1.2-2' }}
+        </div>
+        <p class="text-xs text-brand-muted mt-2">
+          Monto restante para completar objetivos
+        </p>
+      </div>
+
+      <!-- Card 4: Metas Cumplidas -->
+      <div class="bg-brand-sidebar border border-brand-panel/60 rounded-xl p-5 relative overflow-hidden shadow-lg group hover:border-brand-positive/50 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-semibold text-brand-muted uppercase tracking-wider">Logros y Metas</span>
+          <div class="p-2 bg-brand-panel rounded-lg text-brand-positive">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="text-2xl font-black text-brand-positive">
+          {{ summary()?.completedCount || 0 }} <span class="text-sm font-normal text-brand-muted">alcanzadas</span>
+        </div>
+        <p class="text-xs text-brand-muted mt-2">
+          {{ summary()?.warningCount || 0 }} cerca de la meta &bull; {{ (summary()?.budgetsCount || 0) - (summary()?.completedCount || 0) }} en progreso
+        </p>
+      </div>
+    </div>
+
+    <!-- Filters & Actions Toolbar -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-2">
+      <!-- Status Tabs -->
+      <div class="flex items-center gap-2 bg-brand-sidebar border border-brand-panel/50 p-1 rounded-xl">
+        <button (click)="statusFilter = 'Todos'" [ngClass]="statusFilter === 'Todos' ? 'bg-brand-panel text-brand-positive font-bold shadow' : 'text-brand-muted hover:text-white'" class="px-3 py-1.5 text-xs rounded-lg transition-colors cursor-pointer">
+          Todos ({{ budgets().length }})
+        </button>
+        <button (click)="statusFilter = 'completed'" [ngClass]="statusFilter === 'completed' ? 'bg-brand-panel text-brand-positive font-bold shadow' : 'text-brand-muted hover:text-white'" class="px-3 py-1.5 text-xs rounded-lg transition-colors cursor-pointer">
+          Alcanzadas
+        </button>
+        <button (click)="statusFilter = 'normal'" [ngClass]="statusFilter === 'normal' ? 'bg-brand-panel text-brand-positive font-bold shadow' : 'text-brand-muted hover:text-white'" class="px-3 py-1.5 text-xs rounded-lg transition-colors cursor-pointer">
+          En Progreso
+        </button>
+        <button (click)="statusFilter = 'warning'" [ngClass]="statusFilter === 'warning' ? 'bg-brand-panel text-yellow-400 font-bold shadow' : 'text-brand-muted hover:text-white'" class="px-3 py-1.5 text-xs rounded-lg transition-colors cursor-pointer">
+          Cerca (&gt;75%)
+        </button>
+      </div>
+
+      <!-- Action -->
+      <button (click)="openCreateModal()" class="bg-brand-positive hover:bg-lime-400 text-brand-sidebar font-bold px-5 py-2 rounded-xl flex items-center gap-2 transition-colors text-sm cursor-pointer shadow-lg shadow-brand-positive/20">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Crear Meta
+      </button>
+    </div>
+
+    <!-- Budgets Grid -->
+    <div *ngIf="filteredBudgets().length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let budget of filteredBudgets()" class="bg-brand-sidebar border border-brand-panel/60 rounded-2xl p-6 shadow-xl relative hover:border-brand-positive/50 transition-all flex flex-col justify-between group" [ngClass]="budget.status === 'completed' ? 'ring-1 ring-brand-positive/50 bg-gradient-to-br from-brand-sidebar to-brand-panel/30' : ''">
+        <div>
+          <!-- Card Header -->
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-base" [style.backgroundColor]="getCategoryColor(budget.category) + '22'" [style.color]="getCategoryColor(budget.category)">
+                {{ budget.category.charAt(0) }}
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-white">{{ budget.category }}</h3>
+                <p *ngIf="budget.notes" class="text-xs text-brand-positive font-semibold line-clamp-1 mt-0.5">{{ budget.notes }}</p>
+                <p *ngIf="!budget.notes" class="text-xs text-brand-muted/60 mt-0.5">Sin notas</p>
+              </div>
+            </div>
+
+            <!-- Status Badge -->
+            <div>
+              <span *ngIf="budget.status === 'completed'" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-brand-positive/20 text-brand-positive border border-brand-positive/40 shadow-sm animate-pulse">
+                Meta alcanzada
+              </span>
+              <span *ngIf="budget.status === 'warning'" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                ¡Ya casi! (&gt;75%)
+              </span>
+              <span *ngIf="budget.status === 'normal'" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-panel text-brand-muted border border-brand-panel">
+                En progreso
+              </span>
+              <span *ngIf="budget.status === 'exceeded'" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">
+                Límite superado
+              </span>
+            </div>
+          </div>
+
+          <!-- Numbers -->
+          <div class="space-y-1 mb-4">
+            <div class="flex justify-between items-baseline">
+              <div>
+                <span class="text-2xl font-extrabold text-white">Q{{ (budget.current_amount || budget.spent) | number:'1.2-2' }}</span>
+                <span class="text-xs text-brand-muted ml-1.5">abonados</span>
+              </div>
+              <div class="text-right">
+                <span class="text-sm text-brand-muted font-medium">Meta: Q{{ budget.amount | number:'1.2-2' }}</span>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-brand-panel h-3 rounded-full overflow-hidden relative mt-2">
+              <div
+                class="h-full rounded-full transition-all duration-700"
+                [style.width.%]="budget.percentage > 100 ? 100 : budget.percentage"
+                [ngClass]="{
+                  'bg-brand-positive': budget.status === 'completed' || budget.status === 'normal',
+                  'bg-yellow-400': budget.status === 'warning',
+                  'bg-red-500': budget.status === 'exceeded'
+                }"
+              ></div>
+            </div>
+
+            <div class="flex justify-between text-xs font-medium pt-1.5">
+              <span class="text-brand-muted">{{ budget.percentage }}% acumulado</span>
+              <span *ngIf="budget.remaining > 0" class="text-brand-positive font-semibold">Faltan Q{{ budget.remaining | number:'1.2-2' }}</span>
+              <span *ngIf="budget.remaining === 0 || budget.status === 'completed'" class="text-brand-positive font-bold">¡100% Completado!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Footer Actions -->
+        <div class="flex items-center justify-between pt-4 border-t border-brand-panel/40 mt-2">
+          <!-- Botón Destacado: + Abonar -->
+          <button (click)="openAbonoModal(budget)" class="px-3.5 py-1.5 bg-brand-positive hover:bg-lime-400 text-brand-sidebar font-bold text-xs rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-md shadow-brand-positive/10 active:scale-95">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+            </svg>
+            Abonar
+          </button>
+
+          <div class="flex items-center gap-2">
+            <button (click)="openEditModal(budget)" class="px-2.5 py-1.5 text-xs text-brand-muted hover:text-white hover:bg-brand-panel rounded-lg transition-colors cursor-pointer flex items-center gap-1">
+              <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+              Editar
+            </button>
+            <button (click)="openDeleteModal(budget)" class="px-2.5 py-1.5 text-xs text-red-400/80 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer flex items-center gap-1">
+              <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredBudgets().length === 0 && !loading()" class="bg-brand-sidebar border border-brand-panel/60 rounded-2xl p-12 text-center max-w-lg mx-auto shadow-xl">
+      <div class="w-16 h-16 rounded-full bg-brand-panel flex items-center justify-center text-brand-positive mx-auto mb-4">
+        <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-white mb-2">No tienes metas para este mes</h3>
+      <p class="text-sm text-brand-muted mb-6">
+        No se encontraron metas configuradas para {{ getMonthLabel(currentMonth()) }}. ¡Comienza creando tu meta (como una PS5, un viaje o tu fondo personal) y ve abonando hacia ella!
+      </p>
+      <button (click)="openCreateModal()" class="bg-brand-primary hover:bg-brand-accent text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors cursor-pointer shadow-lg">
+        + Crear Primera Meta
+      </button>
+    </div>
+  </div>
+  <!-- END: Budgets Dashboard Body -->
+</main>
+<!-- END: Main Content -->
+
+<!-- Modal Abonar a Meta -->
+<div *ngIf="showAbonoModal && abonoBudget" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+  <div class="bg-brand-sidebar border border-brand-positive/40 rounded-2xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
+    <div class="flex justify-between items-start border-b border-brand-panel/50 pb-4">
+      <div>
+        <span class="text-xs font-semibold text-brand-positive uppercase tracking-wider">Abonar a tu meta</span>
+        <h3 class="text-xl font-black text-white mt-1">
+          {{ abonoBudget.category }}
+          <span *ngIf="abonoBudget.notes" class="text-brand-positive">({{ abonoBudget.notes }})</span>
+        </h3>
+      </div>
+      <button (click)="closeAbonoModal()" class="text-brand-muted hover:text-white cursor-pointer p-1">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mini resumen de la meta -->
+    <div class="bg-brand-bg/80 border border-brand-panel/60 rounded-xl p-4 flex justify-between items-center text-sm">
+      <div>
+        <span class="text-xs text-brand-muted block">Meta Objetivo</span>
+        <span class="font-bold text-white">Q{{ abonoBudget.amount | number:'1.2-2' }}</span>
+      </div>
+      <div>
+        <span class="text-xs text-brand-muted block">Abonado hasta hoy</span>
+        <span class="font-bold text-brand-positive">Q{{ (abonoBudget.current_amount || abonoBudget.spent) | number:'1.2-2' }}</span>
+      </div>
+      <div>
+        <span class="text-xs text-brand-muted block">Faltan</span>
+        <span class="font-bold text-yellow-400">Q{{ abonoBudget.remaining | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <form [formGroup]="abonoForm" (ngSubmit)="confirmAbono()" class="space-y-4">
+      <!-- Monto a abonar -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">¿Cuánto vas a abonar hoy? (Q)</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-brand-positive font-extrabold text-lg">Q</span>
+          <input type="number" step="0.01" formControlName="amount" placeholder="500.00" autofocus class="w-full bg-brand-bg border border-brand-panel rounded-xl py-3 pl-9 pr-3.5 text-white font-bold text-lg focus:outline-none focus:ring-2 focus:ring-brand-positive">
+        </div>
+      </div>
+
+      <!-- Fecha -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Fecha del Abono</label>
+        <input type="date" formControlName="date" class="w-full bg-brand-bg border border-brand-panel rounded-xl py-2 px-3.5 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <!-- Notas -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Nota o Comentario (Opcional)</label>
+        <input type="text" formControlName="notes" placeholder="Ej. Aporte de la quincena" class="w-full bg-brand-bg border border-brand-panel rounded-xl py-2 px-3.5 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <div *ngIf="abonoError" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 p-2.5 rounded-lg">
+        {{ abonoError }}
+      </div>
+
+      <div class="flex justify-end gap-3 pt-3">
+        <button type="button" (click)="closeAbonoModal()" class="px-4 py-2 border border-brand-panel rounded-xl text-sm text-brand-muted hover:text-white transition-colors cursor-pointer">
+          Cancelar
+        </button>
+        <button type="submit" [disabled]="abonoForm.invalid" class="px-6 py-2.5 bg-brand-positive hover:bg-lime-400 text-brand-sidebar font-extrabold rounded-xl text-sm transition-colors cursor-pointer disabled:opacity-50 shadow-lg shadow-brand-positive/20 flex items-center gap-2">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+          </svg>
+          Confirmar Abono
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Crear/Editar Presupuesto / Meta -->
+<div *ngIf="showModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-brand-sidebar border border-brand-panel rounded-2xl max-w-md w-full p-6 space-y-5 shadow-2xl">
+    <div class="flex justify-between items-center border-b border-brand-panel/50 pb-4">
+      <h3 class="text-lg font-bold text-white">
+        {{ isEditMode ? 'Editar Meta o Presupuesto' : 'Nueva Meta u Objetivo' }}
+      </h3>
+      <button (click)="closeModal()" class="text-brand-muted hover:text-white cursor-pointer p-1">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+    </div>
+
+    <form [formGroup]="budgetForm" (ngSubmit)="saveBudget()" class="space-y-4">
+
+      <!-- Categoría -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Categoría</label>
+        <select formControlName="category" class="w-full bg-brand-bg border border-brand-panel rounded-xl py-2.5 px-3.5 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+
+      <!-- Monto Meta -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Monto Meta / Objetivo (Q)</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-brand-muted font-bold">Q</span>
+          <input type="number" step="0.01" formControlName="amount" placeholder="5000.00" class="w-full bg-brand-bg border border-brand-panel rounded-xl py-2.5 pl-8 pr-3.5 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+        </div>
+      </div>
+
+      <!-- Nombre o Nota de la Meta -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Nombre de la Meta (Opcional)</label>
+        <input type="text" formControlName="notes" placeholder="Ej. PS5, Vacaciones, Guardarropa" class="w-full bg-brand-bg border border-brand-panel rounded-xl py-2.5 px-3.5 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <!-- Mes -->
+      <div>
+        <label class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Mes Correspondiente</label>
+        <input type="month" formControlName="month" class="w-full bg-brand-bg border border-brand-panel rounded-xl py-2.5 px-3.5 text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+      </div>
+
+      <div *ngIf="modalError" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 p-2.5 rounded-lg">
+        {{ modalError }}
+      </div>
+
+      <div class="flex justify-end gap-3 pt-3">
+        <button type="button" (click)="closeModal()" class="px-4 py-2 border border-brand-panel rounded-xl text-sm text-brand-muted hover:text-white transition-colors cursor-pointer">
+          Cancelar
+        </button>
+        <button type="submit" [disabled]="budgetForm.invalid" class="px-5 py-2 bg-brand-primary hover:bg-brand-accent text-white rounded-xl text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 shadow-md">
+          Guardar Meta
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Confirmar Eliminación -->
+<div *ngIf="showDeleteModal && budgetToDelete" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-brand-sidebar border border-brand-panel rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl text-center">
+    <div class="w-12 h-12 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mx-auto mb-2">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+    </div>
+
+    <h3 class="text-lg font-bold text-white">¿Eliminar Meta?</h3>
+    <p class="text-sm text-brand-muted">
+      Estás a punto de eliminar la meta de <span class="text-white font-semibold">{{ budgetToDelete.category }} ({{ budgetToDelete.notes || '' }})</span> por Q{{ budgetToDelete.amount | number:'1.2-2' }}.
+    </p>
+
+    <div class="flex justify-center gap-3 pt-3">
+      <button (click)="closeDeleteModal()" class="px-4 py-2 border border-brand-panel rounded-xl text-sm text-brand-muted hover:text-white transition-colors cursor-pointer">
+        Cancelar
+      </button>
+      <button (click)="confirmDelete()" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-medium transition-colors cursor-pointer shadow-md">
+        Sí, eliminar
+      </button>
+    </div>
+  </div>
+</div>

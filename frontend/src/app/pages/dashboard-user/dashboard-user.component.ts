@@ -17,6 +17,9 @@ Chart.register(...registerables);
 })
 export class DashboardUserComponent implements OnInit, AfterViewInit {
   fullName = "";
+  email = "";
+  avatarUrl = "";
+  googleId = "";
   summary = signal<ExpenseSummaryInterface | null>(null);
   recentTransactions = signal<ExpenseInterface[]>([]);
   cashFlowData = signal<MonthData[]>([]);
@@ -59,6 +62,10 @@ export class DashboardUserComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.fullName = localStorage.getItem("fullName") || "Usuario";
+    this.email = localStorage.getItem("email") || "";
+    this.avatarUrl = localStorage.getItem("avatarUrl") || this.authService.avatarUrl() || "";
+    this.googleId = localStorage.getItem("googleId") || "";
+
     const token = localStorage.getItem("token");
     if (token && !this.authService.isTokenExpired()) {
       this.authService.scheduleAutoLogout(token);
