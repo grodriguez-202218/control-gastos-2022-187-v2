@@ -1,0 +1,400 @@
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-brand-sidebar flex flex-col justify-between h-full border-r border-brand-panel/50 shrink-0">
+  <div class="p-6">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-10 h-10 rounded-full bg-brand-panel flex items-center justify-center text-brand-positive">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold text-white tracking-tight">Aureo Lunas</h1>
+        <p class="text-xs text-brand-muted">Gestión de Gastos</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="space-y-1.5">
+      <a routerLink="/dashboard" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Panel de Control
+      </a>
+      <a routerLink="/transactions" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Transacciones
+      </a>
+      <a routerLink="/budgets" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Presupuestos
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Reportes
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bottom Actions -->
+  <div class="p-6 space-y-1.5">
+    <!-- Ajustes Active Item -->
+    <a routerLink="/settings" class="flex items-center gap-3 px-4 py-2.5 bg-brand-panel rounded-lg text-brand-positive font-medium border-r-4 border-brand-positive text-sm">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ajustes
+    </a>
+
+    <a routerLink="/help" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ayuda
+    </a>
+
+    <div class="border-t border-brand-panel/50 pt-2 mt-2">
+      <a (click)="logout()" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm cursor-pointer">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Cerrar Sesión
+      </a>
+    </div>
+  </div>
+</aside>
+<!-- END: Sidebar -->
+
+<!-- BEGIN: Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+  <!-- Topbar -->
+  <header class="bg-brand-bg border-b border-brand-panel/50 h-16 flex items-center justify-between px-8 shrink-0 relative">
+    <div class="flex items-center gap-4">
+      <div class="relative w-64">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="h-4 w-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input class="block w-full pl-10 pr-3 py-1.5 border border-brand-panel bg-brand-sidebar rounded-full text-sm text-white placeholder-brand-muted focus:outline-none focus:ring-1 focus:ring-brand-positive focus:border-brand-positive" placeholder="Buscar..." type="text">
+      </div>
+    </div>
+
+    <!-- Centered Page Title -->
+    <div class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+      <h2 class="text-xl font-bold text-brand-primary">Ajustes</h2>
+      <span class="text-xs text-brand-muted">Configuración del Sistema</span>
+    </div>
+
+    <!-- User Profile in Topbar -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col text-right">
+          <span class="text-sm font-medium text-brand-text">{{ fullName }}</span>
+          <span *ngIf="email" class="text-xs text-brand-muted">{{ email }}</span>
+        </div>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" [alt]="fullName" class="h-8 w-8 rounded-full object-cover border border-brand-positive" referrerpolicy="no-referrer" />
+        <div *ngIf="!avatarUrl" class="h-8 w-8 rounded-full bg-brand-panel flex items-center justify-center border border-brand-panel text-brand-positive font-bold text-xs uppercase">
+          {{ fullName.substring(0, 2) }}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <div class="flex-1 overflow-y-auto p-8 space-y-6">
+    <!-- Header Section -->
+    <div class="border-b border-brand-panel/40 pb-5 flex justify-between items-end">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-brand-positive/10 text-brand-positive border border-brand-positive/20">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Ajustes y Configuración</h2>
+          <p class="text-brand-muted text-sm mt-0.5">Administra tu perfil, moneda, alertas de presupuesto y seguridad.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div *ngIf="successMessage()" class="p-4 rounded-xl bg-brand-positive/15 border border-brand-positive/40 text-brand-positive flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span class="font-medium text-sm">{{ successMessage() }}</span>
+      </div>
+      <button (click)="clearAlerts()" class="text-xs text-brand-muted hover:text-white cursor-pointer">&times;</button>
+    </div>
+
+    <div *ngIf="errorMessage()" class="p-4 rounded-xl bg-red-500/15 border border-red-500/40 text-red-400 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <span class="font-medium text-sm">{{ errorMessage() }}</span>
+      </div>
+      <button (click)="clearAlerts()" class="text-xs text-brand-muted hover:text-white cursor-pointer">&times;</button>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="flex items-center gap-2 border-b border-brand-panel/60 pb-px overflow-x-auto">
+      <button (click)="setTab('profile')" [ngClass]="activeTab() === 'profile' ? 'text-brand-positive border-brand-positive bg-brand-panel/40' : 'text-brand-muted hover:text-white border-transparent'" class="px-5 py-3 rounded-t-xl border-b-2 font-medium text-sm flex items-center gap-2 transition-all cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+        Perfil de Usuario
+      </button>
+
+      <button (click)="setTab('preferences')" [ngClass]="activeTab() === 'preferences' ? 'text-brand-positive border-brand-positive bg-brand-panel/40' : 'text-brand-muted hover:text-white border-transparent'" class="px-5 py-3 rounded-t-xl border-b-2 font-medium text-sm flex items-center gap-2 transition-all cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+        Preferencias
+      </button>
+
+      <button (click)="setTab('notifications')" [ngClass]="activeTab() === 'notifications' ? 'text-brand-positive border-brand-positive bg-brand-panel/40' : 'text-brand-muted hover:text-white border-transparent'" class="px-5 py-3 rounded-t-xl border-b-2 font-medium text-sm flex items-center gap-2 transition-all cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+        Notificaciones
+      </button>
+
+      <button (click)="setTab('security')" [ngClass]="activeTab() === 'security' ? 'text-brand-positive border-brand-positive bg-brand-panel/40' : 'text-brand-muted hover:text-white border-transparent'" class="px-5 py-3 rounded-t-xl border-b-2 font-medium text-sm flex items-center gap-2 transition-all cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        Seguridad & Sesión
+      </button>
+    </div>
+
+    <!-- TAB 1: PERFIL DE USUARIO -->
+    <div *ngIf="activeTab() === 'profile'" class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 backdrop-blur-sm space-y-6">
+      <div class="flex items-center justify-between border-b border-brand-panel/40 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white">Datos de Perfil</h3>
+          <p class="text-xs text-brand-muted">Actualiza tu nombre de usuario, correo y foto de avatar.</p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border"
+          [ngClass]="role === 'admin' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : 'bg-brand-positive/20 text-brand-positive border-brand-positive/30'">
+          Rol: {{ role }}
+        </span>
+      </div>
+
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="space-y-6 max-w-2xl">
+        <!-- Avatar Preview & Preset Selection -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-3">Foto de Perfil / Avatar</label>
+          <div class="flex items-center gap-5">
+            <img *ngIf="profileForm.value.avatarUrl" [src]="profileForm.value.avatarUrl" alt="Avatar" class="w-16 h-16 rounded-full object-cover border-2 border-brand-positive shadow-md" />
+            <div *ngIf="!profileForm.value.avatarUrl" class="w-16 h-16 rounded-full bg-brand-panel flex items-center justify-center border-2 border-brand-positive text-brand-positive font-bold text-xl uppercase shadow-md">
+              {{ (profileForm.value.fullName || 'U').substring(0, 2) }}
+            </div>
+            <div class="flex-1 space-y-2">
+              <input type="text" formControlName="avatarUrl" placeholder="https://ejemplo.com/foto.jpg" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2 px-3 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+              <p class="text-xs text-brand-muted">O elige uno de los avatares predeterminados:</p>
+              <div class="flex items-center gap-2">
+                <button *ngFor="let avatar of presetAvatars" type="button" (click)="selectPresetAvatar(avatar)" class="p-1 rounded-full hover:ring-2 hover:ring-brand-positive transition-all cursor-pointer">
+                  <img [src]="avatar" class="w-7 h-7 rounded-full bg-brand-panel" alt="Preset">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Name Input -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Nombre Completo</label>
+          <input type="text" formControlName="fullName" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+        </div>
+
+        <!-- Email Input -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Correo Electrónico</label>
+          <input type="email" formControlName="email" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" [disabled]="profileForm.invalid" class="bg-brand-primary hover:bg-brand-accent text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Guardar Cambios de Perfil
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- TAB 2: PREFERENCIAS FINANCIERAS -->
+    <div *ngIf="activeTab() === 'preferences'" class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 backdrop-blur-sm space-y-6">
+      <div class="border-b border-brand-panel/40 pb-4">
+        <h3 class="text-lg font-bold text-white">Preferencias de la Aplicación</h3>
+        <p class="text-xs text-brand-muted">Ajusta la moneda base, formatos de fecha y presupuestos por defecto.</p>
+      </div>
+
+      <form [formGroup]="preferencesForm" (ngSubmit)="savePreferences()" class="space-y-5 max-w-2xl">
+        <!-- Currency Selection -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Moneda Principal</label>
+          <select formControlName="currency" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+            <option *ngFor="let c of availableCurrencies" [value]="c.code">{{ c.name }}</option>
+          </select>
+          <p class="text-xs text-brand-muted mt-1">Moneda predeterminada para todos los cálculos y reportes financieros.</p>
+        </div>
+
+        <!-- Monthly Budget Base -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Presupuesto Mensual Base (Sugerido)</label>
+          <input type="number" formControlName="monthlyBudget" min="0" step="100" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          <p class="text-xs text-brand-muted mt-1">Presupuesto inicial para el cálculo de disponibilidad en el Tablero Financiero.</p>
+        </div>
+
+        <!-- Date Format -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Formato de Fecha</label>
+          <select formControlName="dateFormat" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+            <option value="DD/MM/YYYY">DD/MM/YYYY (Ej: 15/09/2026)</option>
+            <option value="YYYY-MM-DD">YYYY-MM-DD (Ej: 2026-09-15)</option>
+            <option value="MM/DD/YYYY">MM/DD/YYYY (Ej: 09/15/2026)</option>
+          </select>
+        </div>
+
+        <!-- Default Category -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Categoría Habitual por Defecto</label>
+          <select formControlName="defaultCategory" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+            <option *ngFor="let cat of availableCategories" [value]="cat">{{ cat }}</option>
+          </select>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" [disabled]="preferencesForm.invalid" class="bg-brand-primary hover:bg-brand-accent text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Guardar Preferencias
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- TAB 3: NOTIFICACIONES -->
+    <div *ngIf="activeTab() === 'notifications'" class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 backdrop-blur-sm space-y-6">
+      <div class="border-b border-brand-panel/40 pb-4">
+        <h3 class="text-lg font-bold text-white">Notificaciones y Alertas</h3>
+        <p class="text-xs text-brand-muted">Controla cuándo y cómo el sistema debe notificarte sobre tus finanzas.</p>
+      </div>
+
+      <form [formGroup]="notificationsForm" (ngSubmit)="saveNotifications()" class="space-y-4 max-w-2xl">
+        <!-- Budget Alert Toggle -->
+        <label class="flex items-center justify-between p-4 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40 cursor-pointer hover:bg-brand-sidebar transition-colors">
+          <div>
+            <span class="text-sm font-semibold text-white block">Alerta de Límite de Presupuesto (80%)</span>
+            <span class="text-xs text-brand-muted">Avisar cuando los gastos del mes alcancen o superen el 80% del presupuesto asignado.</span>
+          </div>
+          <input type="checkbox" formControlName="budgetAlert" class="w-5 h-5 accent-brand-positive cursor-pointer">
+        </label>
+
+        <!-- High Transaction Alert -->
+        <label class="flex items-center justify-between p-4 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40 cursor-pointer hover:bg-brand-sidebar transition-colors">
+          <div>
+            <span class="text-sm font-semibold text-white block">Alerta de Transacciones Altas</span>
+            <span class="text-xs text-brand-muted">Notificación destacada al registrar egresos superiores a Q 1,000.00.</span>
+          </div>
+          <input type="checkbox" formControlName="highTransactionAlert" class="w-5 h-5 accent-brand-positive cursor-pointer">
+        </label>
+
+        <!-- Daily Reminder -->
+        <label class="flex items-center justify-between p-4 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40 cursor-pointer hover:bg-brand-sidebar transition-colors">
+          <div>
+            <span class="text-sm font-semibold text-white block">Recordatorio de Registro Diario</span>
+            <span class="text-xs text-brand-muted">Recibir un recordatorio al final del día si no has registrado tus gastos.</span>
+          </div>
+          <input type="checkbox" formControlName="dailyReminder" class="w-5 h-5 accent-brand-positive cursor-pointer">
+        </label>
+
+        <!-- Email Notifications -->
+        <label class="flex items-center justify-between p-4 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40 cursor-pointer hover:bg-brand-sidebar transition-colors">
+          <div>
+            <span class="text-sm font-semibold text-white block">Resumen Semanal por Correo</span>
+            <span class="text-xs text-brand-muted">Envío automatizado de resumen de balance y metas alcanzadas.</span>
+          </div>
+          <input type="checkbox" formControlName="emailNotifications" class="w-5 h-5 accent-brand-positive cursor-pointer">
+        </label>
+
+        <div class="pt-3">
+          <button type="submit" class="bg-brand-primary hover:bg-brand-accent text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Guardar Configuración de Notificaciones
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- TAB 4: SEGURIDAD Y SESIÓN -->
+    <div *ngIf="activeTab() === 'security'" class="space-y-6">
+      <!-- Change Password Card -->
+      <div class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 backdrop-blur-sm space-y-6">
+        <div class="border-b border-brand-panel/40 pb-4">
+          <h3 class="text-lg font-bold text-white">Cambiar Contraseña</h3>
+          <p class="text-xs text-brand-muted">Actualiza tu contraseña para mantener la cuenta protegida.</p>
+        </div>
+
+        <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" class="space-y-4 max-w-md">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Contraseña Actual</label>
+            <input type="password" formControlName="currentPassword" placeholder="••••••••" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Nueva Contraseña (mín. 6 caracteres)</label>
+            <input type="password" formControlName="newPassword" placeholder="••••••••" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Confirmar Nueva Contraseña</label>
+            <input type="password" formControlName="confirmPassword" placeholder="••••••••" class="w-full bg-brand-bg border border-brand-panel rounded-lg py-2.5 px-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-positive">
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" [disabled]="passwordForm.invalid" class="bg-brand-primary hover:bg-brand-accent text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              Actualizar Contraseña
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Active Session Information Card -->
+      <div class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 backdrop-blur-sm">
+        <div class="border-b border-brand-panel/40 pb-4 mb-4 flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-white">Sesión Activa</h3>
+            <p class="text-xs text-brand-muted">Detalles del token JWT y estado de autenticación.</p>
+          </div>
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-positive/15 text-brand-positive border border-brand-positive/30">
+            <span class="w-2 h-2 rounded-full bg-brand-positive animate-pulse"></span>
+            Sesión Protegida
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-5">
+          <div class="p-3.5 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40">
+            <span class="text-xs text-brand-muted block mb-1">Mecanismo de Seguridad</span>
+            <span class="text-white font-mono">JWT con Renovación Automática</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40">
+            <span class="text-xs text-brand-muted block mb-1">Detección de Actividad</span>
+            <span class="text-brand-positive font-semibold">Activa (movimiento y tecleo)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-brand-panel/40">
+          <span class="text-xs text-brand-muted">Aureo Lunas &bull; Versión 2.0.0</span>
+          <button (click)="logout()" class="px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-semibold transition-colors cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            Cerrar Sesión Activa
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+<!-- END: Main Content -->

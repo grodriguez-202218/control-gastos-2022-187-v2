@@ -5,6 +5,8 @@ import { DashboardAdminComponent } from "./pages/dashboard-admin/dashboard-admin
 import { DashboardUserComponent } from "./pages/dashboard-user/dashboard-user.component";
 import { TransactionsComponent } from "./pages/transactions/transactions.component";
 import { BudgetsComponent } from "./pages/budgets/budgets.component";
+import { SettingsComponent } from "./pages/settings/settings.component";
+import { HelpComponent } from "./pages/help/help.component";
 import { authGuard } from "./core/guards/auth-guard";
 
 export const routes: Routes = [
@@ -38,4 +40,24 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { role: "user" },
   },
-];
+  {
+    path: "settings",
+    component: SettingsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: "ajustes",
+    redirectTo: "settings",
+    pathMatch: "full",
+  },
+  {
+    path: "help",
+    component: HelpComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: "ayuda",
+    redirectTo: "help",
+    pathMatch: "full",
+  },
+];
