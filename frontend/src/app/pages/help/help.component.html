@@ -1,0 +1,297 @@
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-brand-sidebar flex flex-col justify-between h-full border-r border-brand-panel/50 shrink-0">
+  <div class="p-6">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-10 h-10 rounded-full bg-brand-panel flex items-center justify-center text-brand-positive">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold text-white tracking-tight">Aureo Lunas</h1>
+        <p class="text-xs text-brand-muted">Gestión de Gastos</p>
+      </div>
+    </div>
+
+    <!-- Quick Action / Navigation -->
+    <nav class="space-y-1.5">
+      <a routerLink="/dashboard" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Panel de Control
+      </a>
+      <a routerLink="/transactions" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Transacciones
+      </a>
+      <a routerLink="/budgets" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Presupuestos
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2.5 text-brand-muted/40 cursor-not-allowed rounded-lg text-sm border-r-4 border-transparent">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Reportes
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bottom Actions -->
+  <div class="p-6 space-y-1.5">
+    <a routerLink="/settings" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm border-r-4 border-transparent">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ajustes
+    </a>
+
+    <!-- Ayuda Active Item -->
+    <a routerLink="/help" class="flex items-center gap-3 px-4 py-2.5 bg-brand-panel rounded-lg text-brand-positive font-medium border-r-4 border-brand-positive text-sm">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      Ayuda
+    </a>
+
+    <div class="border-t border-brand-panel/50 pt-2 mt-2">
+      <a (click)="logout()" class="flex items-center gap-3 px-4 py-2.5 text-brand-muted hover:text-white hover:bg-brand-panel/50 rounded-lg transition-colors text-sm cursor-pointer">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        Cerrar Sesión
+      </a>
+    </div>
+  </div>
+</aside>
+<!-- END: Sidebar -->
+
+<!-- BEGIN: Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+  <!-- Topbar -->
+  <header class="bg-brand-bg border-b border-brand-panel/50 h-16 flex items-center justify-between px-8 shrink-0 relative">
+    <div class="flex items-center gap-4">
+      <div class="relative w-64">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="h-4 w-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <input class="block w-full pl-10 pr-3 py-1.5 border border-brand-panel bg-brand-sidebar rounded-full text-sm text-white placeholder-brand-muted focus:outline-none focus:ring-1 focus:ring-brand-positive focus:border-brand-positive" placeholder="Buscar..." type="text">
+      </div>
+    </div>
+
+    <!-- Centered Page Title -->
+    <div class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+      <h2 class="text-xl font-bold text-brand-primary">Centro de Ayuda</h2>
+      <span class="text-xs text-brand-muted">Información de Contacto</span>
+    </div>
+
+    <!-- User Profile in Topbar -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col text-right">
+          <span class="text-sm font-medium text-brand-text">{{ fullName }}</span>
+          <span *ngIf="email" class="text-xs text-brand-muted">{{ email }}</span>
+        </div>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" [alt]="fullName" class="h-8 w-8 rounded-full object-cover border border-brand-positive" referrerpolicy="no-referrer" />
+        <div *ngIf="!avatarUrl" class="h-8 w-8 rounded-full bg-brand-panel flex items-center justify-center border border-brand-panel text-brand-positive font-bold text-xs uppercase">
+          {{ fullName.substring(0, 2) }}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <div class="flex-1 overflow-y-auto p-8 space-y-6">
+    <!-- Toast Notification for Copying -->
+    <div *ngIf="copiedToast()" class="fixed top-20 right-8 z-50 bg-brand-positive text-brand-bg px-4 py-2.5 rounded-lg shadow-xl font-semibold text-sm flex items-center gap-2 animate-bounce">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+      {{ copiedToast() }}
+    </div>
+
+    <!-- Section Header -->
+    <div class="border-b border-brand-panel/40 pb-5">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-brand-positive/10 text-brand-positive border border-brand-positive/20">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Información de Contacto</h2>
+          <p class="text-brand-muted text-sm mt-0.5">Canales de atención directa y datos del equipo de soporte y desarrollo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Contact Cards Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Card 1: Desarrollador & Soporte Técnico -->
+      <div class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 relative overflow-hidden backdrop-blur-sm">
+        <div class="absolute -right-6 -bottom-6 w-36 h-36 bg-brand-positive/5 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex items-start justify-between mb-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-panel to-brand-sidebar border border-brand-positive/30 flex items-center justify-center text-brand-positive text-xl font-bold shadow-inner">
+              GR
+            </div>
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-positive/15 text-brand-positive border border-brand-positive/30 mb-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-positive animate-pulse"></span>
+                Desarrollador Principal
+              </span>
+              <h3 class="text-lg font-bold text-white">Gahel Emiliano Rodriguez Albeño</h3>
+              <p class="text-xs text-brand-muted">Carné / Código: <span class="text-brand-text font-mono font-semibold">2022187</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2 border-t border-brand-panel/40 text-sm">
+          <div class="flex items-center justify-between p-3 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-brand-panel text-brand-muted">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-brand-muted">Especialidad</p>
+                <p class="text-white font-medium">Informática</p>
+              </div>
+            </div>
+            <span class="text-xs text-brand-muted font-mono">Promoción 2026</span>
+          </div>
+
+          <div class="flex items-center justify-between p-3 rounded-xl bg-brand-sidebar/70 border border-brand-panel/40">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-brand-panel text-brand-muted">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-brand-muted">Institución</p>
+                <p class="text-white font-medium">Fundación Kinal</p>
+              </div>
+            </div>
+            <span class="text-xs text-brand-positive font-medium">Guatemala</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Correo Electrónico Oficial -->
+      <div class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 relative overflow-hidden backdrop-blur-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Correo de Soporte y Contacto</h3>
+              <p class="text-xs text-brand-muted">Atención por correo electrónico y reporte de incidencias.</p>
+            </div>
+          </div>
+
+          <!-- Email Item 1 -->
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-brand-sidebar/80 border border-brand-panel/50 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] uppercase tracking-wider text-brand-muted font-semibold block mb-0.5">Soporte Aureo Lunas</span>
+                <span class="text-white font-mono text-sm">soporte&#64;aureolunas.com</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button (click)="copyToClipboard('soporte@aureolunas.com', 'Correo')" title="Copiar correo" class="p-2 rounded-lg bg-brand-panel hover:bg-brand-panel/80 text-brand-muted hover:text-white transition-colors cursor-pointer">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                  </svg>
+                </button>
+                <a href="mailto:soporte@aureolunas.com" class="p-2 rounded-lg bg-brand-primary hover:bg-brand-accent text-white transition-colors cursor-pointer" title="Enviar correo">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Email Item 2 -->
+            <div class="p-3.5 rounded-xl bg-brand-sidebar/80 border border-brand-panel/50 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] uppercase tracking-wider text-brand-muted font-semibold block mb-0.5">Contacto Institucional</span>
+                <span class="text-white font-mono text-sm">grodriguez-2022187&#64;kinal.edu.gt</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button (click)="copyToClipboard('grodriguez-2022187@kinal.edu.gt', 'Correo institucional')" title="Copiar correo" class="p-2 rounded-lg bg-brand-panel hover:bg-brand-panel/80 text-brand-muted hover:text-white transition-colors cursor-pointer">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                  </svg>
+                </button>
+                <a href="mailto:gahel.rodriguez@kinal.edu.gt" class="p-2 rounded-lg bg-brand-primary hover:bg-brand-accent text-white transition-colors cursor-pointer" title="Enviar correo">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Card 4: Horario de Atención y Ubicación -->
+      <div class="bg-brand-panel/60 border border-brand-panel rounded-2xl p-6 relative overflow-hidden backdrop-blur-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-3 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Disponibilidad y Ubicación</h3>
+              <p class="text-xs text-brand-muted">Horarios de cobertura y localización geográfica.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-brand-sidebar/80 border border-brand-panel/50">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs text-brand-muted">Horario de Atención</span>
+                <span class="text-xs text-brand-positive font-medium">Lunes a Viernes</span>
+              </div>
+              <p class="text-white font-medium text-sm">07:00 – 17:00 hrs (GMT-6, Hora de Guatemala)</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-brand-sidebar/80 border border-brand-panel/50">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs text-brand-muted">Sede Principal</span>
+                <span class="text-xs text-brand-muted font-mono">GT (Guatemala)</span>
+              </div>
+              <p class="text-white font-medium text-sm">Ciudad de Guatemala, Guatemala, C.A.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-brand-panel/40 flex items-center justify-between text-xs text-brand-muted">
+          <span>Aureo Lunas &bull; Gestión Financiera Personal</span>
+          <span class="font-mono text-brand-positive">Versión 2.0.0</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<!-- END: Main Content -->
